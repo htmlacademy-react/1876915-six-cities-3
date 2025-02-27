@@ -1,7 +1,8 @@
 # Личный проект «Шесть городов»
 
-* Студент: [Сергей Софронов](https://up.htmlacademy.ru/react-individual/3/user/1876915).
-* Наставник: `Неизвестно`.
+* Студент: [Сергей Софронов](https://htmlacademy.ru/profile/id1876915).
+* Наставник: [Артем Новосёлов](https://htmlacademy.ru/profile/id1195129).
+* Проект: ["Проект «Шесть городов»"](https://sergeysofronov.github.io/1876915-six-cities-3/).
 
 ---
 
