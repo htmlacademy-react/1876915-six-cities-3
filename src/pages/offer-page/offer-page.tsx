@@ -1,8 +1,12 @@
+import { Helmet } from 'react-helmet-async';
 import Header from '../../components/header/header';
 
-export default function OfferScreen() {
+export default function OfferPage() {
   return (
     <div className="page">
+      <Helmet>
+        <title>6 Cities.Offer</title>
+      </Helmet>
       <Header />
       <main className="page__main page__main--offer">
         <section className="offer">

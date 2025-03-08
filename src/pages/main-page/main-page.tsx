@@ -1,20 +1,29 @@
 import PlaceList from '../../components/place-list/place-list';
 import Header from '../../components/header/header';
-import Tabs from '../../components/tabs/tabs';
 import Map from '../../components/map/map';
+import LocationTabs from '../../components/location-tabs/location-tabs';
+import { useState } from 'react';
+import { CITY_NAMES } from '../../const';
 
-type MainProps = {
+type MainPageProps = {
   cardsCount: number;
 }
 
-export default function MainScreen({ cardsCount }: MainProps) {
+export default function MainPage({ cardsCount }: MainPageProps) {
+
+  const [activeTab, setActiveTab] = useState(CITY_NAMES[0]);
+
   return (
     <div className="page page--gray page--main">
       <Header />
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
-          <Tabs />
+          <LocationTabs
+            cityNames={CITY_NAMES}
+            activeTabName={activeTab}
+            tabChangeHandler={(tabName) => setActiveTab(tabName)}
+          />
         </div>
         <div className="cities">
           <div className="cities__places-container container">
