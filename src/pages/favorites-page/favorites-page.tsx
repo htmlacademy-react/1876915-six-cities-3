@@ -1,8 +1,12 @@
+import { Helmet } from 'react-helmet-async';
 import Footer from '../../components/footer/footer';
 
-export default function FavoritesScreen() {
+export default function FavoritesPage() {
   return (
     <div className="page">
+      <Helmet>
+        <title>6 Cities.Favorite places</title>
+      </Helmet>
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
