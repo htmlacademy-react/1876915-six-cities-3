@@ -15,7 +15,7 @@ export default function Layout() {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <Link className={`header__logo-link ${clsx(isLogoActive && 'header__logo-link--active')}`} to={AppRoute.Main}>
+              <Link className={clsx('header__logo-link', isLogoActive && 'header__logo-link--active')} to={AppRoute.Main}>
                 <img
                   className="header__logo"
                   src="img/logo.svg"

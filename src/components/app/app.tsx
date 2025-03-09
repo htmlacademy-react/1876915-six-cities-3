@@ -1,6 +1,7 @@
 import { HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { AppRoute } from '../../const';
+import { PlacePreview } from '../../types';
 import MainPage from '../../pages/main-page/main-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import LoginPage from '../../pages/login-page/login-page';
@@ -10,16 +11,16 @@ import PrivateRoute from '../private-route/private-route';
 import Layout from '../layout/layout';
 
 type AppProps = {
-  cardsCount: number;
+  placePreviews: PlacePreview[];
 }
 
-export default function App({ cardsCount }: AppProps) {
+export default function App({ placePreviews }: AppProps) {
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route path={AppRoute.Main} element={<Layout />}>
-            <Route index element={<MainPage cardsCount={cardsCount} />} />
+            <Route index element={<MainPage placePreviews={placePreviews} />} />
             <Route path={AppRoute.Login} element={<LoginPage />} />
             <Route path={AppRoute.Offers} element={<OfferPage />} />
             <Route path={AppRoute.Favorites} element={
