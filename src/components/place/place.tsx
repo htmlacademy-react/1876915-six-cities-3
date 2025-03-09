@@ -1,3 +1,9 @@
+import { PlacePreview } from '../../types';
+
+type PlaceListProps = {
+  placePreview: PlacePreview;
+}
+
 const getPlaceMark = () => (
   <div className="place-card__mark">
     <span>Premium</span>
@@ -5,7 +11,7 @@ const getPlaceMark = () => (
 );
 
 
-export default function Place() {
+export default function Place({ placePreview }: PlaceListProps) {
   return (
     <article className="cities__card place-card">
       {getPlaceMark()}

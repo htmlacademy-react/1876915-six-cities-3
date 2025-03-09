@@ -1,29 +1,16 @@
 import { Helmet } from 'react-helmet-async';
+import { getAuthorizationStatus } from '../../mocks/utils';
+import { AppRoute, AuthorizationStatus } from '../../const';
+import { Navigate } from 'react-router-dom';
 
 export default function LoginPage() {
   return (
-    <div className="page page--gray page--login">
-      <Helmet>
-        <title>6 Cities.Login</title>
-      </Helmet>
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <a className="header__logo-link" href="main.html">
-                <img
-                  className="header__logo"
-                  src="img/logo.svg"
-                  alt="6 cities logo"
-                  width={81}
-                  height={41}
-                />
-              </a>
-            </div>
-          </div>
-        </div>
-      </header>
+    (getAuthorizationStatus() === AuthorizationStatus.Auth) ?
+      <Navigate to={AppRoute.Main} /> :
       <main className="page__main page__main--login">
+        <Helmet>
+          <title>6 Cities.Login</title>
+        </Helmet>
         <div className="page__login-container container">
           <section className="login">
             <h1 className="login__title">Sign in</h1>
@@ -62,7 +49,7 @@ export default function LoginPage() {
           </section>
         </div>
       </main>
-    </div>
+
 
   );
 }
