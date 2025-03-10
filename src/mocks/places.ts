@@ -20,7 +20,7 @@ const places: PlacePreview[] = [
       longitude: 2.342499,
       zoom: 16
     },
-    isFavorite: false,
+    isFavorite: true,
     isPremium: true,
     rating: 2.5
   },
@@ -135,7 +135,7 @@ const places: PlacePreview[] = [
       longitude: 4.911976,
       zoom: 16
     },
-    isFavorite: false,
+    isFavorite: true,
     isPremium: true,
     rating: 2.5
   },
@@ -181,7 +181,7 @@ const places: PlacePreview[] = [
       longitude: 6.798314,
       zoom: 16
     },
-    isFavorite: false,
+    isFavorite: true,
     isPremium: true,
     rating: 2.3
   }

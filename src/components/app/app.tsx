@@ -9,18 +9,19 @@ import OfferPage from '../../pages/offer-page/offer-page';
 import FavoritesPage from '../../pages/favorites-page/favorites-page';
 import PrivateRoute from '../private-route/private-route';
 import Layout from '../layout/layout';
+import NotFoundPageRedirect from '../../pages/not-found-page/not-found-page-redirect';
 
 type AppProps = {
-  placePreviews: PlacePreview[];
+  previewList: PlacePreview[];
 }
 
-export default function App({ placePreviews }: AppProps) {
+export default function App({ previewList }: AppProps) {
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route path={AppRoute.Main} element={<Layout />}>
-            <Route index element={<MainPage placePreviews={placePreviews} />} />
+            <Route index element={<MainPage previewList={previewList} />} />
             <Route path={AppRoute.Login} element={<LoginPage />} />
             <Route path={AppRoute.Offers} element={<OfferPage />} />
             <Route path={AppRoute.Favorites} element={
@@ -29,7 +30,8 @@ export default function App({ placePreviews }: AppProps) {
               </PrivateRoute>
             }
             />
-            <Route path='*' element={<NotFoundPage />} />
+            <Route path='*' element={<NotFoundPageRedirect />} />
+            <Route path={AppRoute.NotFound} element={<NotFoundPage />} />
           </Route>
         </Routes>
       </BrowserRouter>

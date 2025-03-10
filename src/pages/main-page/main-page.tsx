@@ -6,12 +6,13 @@ import Map from '../../components/map/map';
 import LocationTabs from '../../components/location-tabs/location-tabs';
 
 type MainPageProps = {
-  placePreviews: PlacePreview[];
+  previewList: PlacePreview[];
 }
 
-export default function MainPage({ placePreviews }: MainPageProps) {
+export default function MainPage({ previewList }: MainPageProps) {
 
   const [activeTab, setActiveTab] = useState(CITY_NAMES[0]);
+  const filtered = previewList.filter((item) => item.city.name === activeTab);
 
   return (
     <main className="page__main page__main--index">
@@ -25,7 +26,7 @@ export default function MainPage({ placePreviews }: MainPageProps) {
       </div>
       <div className="cities">
         <div className="cities__places-container container">
-          <PlaceList placePreviews={placePreviews} />
+          <PlaceList previewList={filtered} />
           <div className="cities__right-section">
             <Map />
           </div>

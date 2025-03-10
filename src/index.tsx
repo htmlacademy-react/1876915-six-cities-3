@@ -9,6 +9,6 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App placePreviews={getPlaces()} />
+    <App previewList={getPlaces()} />
   </React.StrictMode>
 );
