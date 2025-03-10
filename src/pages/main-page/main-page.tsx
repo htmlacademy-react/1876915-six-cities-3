@@ -12,7 +12,7 @@ type MainPageProps = {
 export default function MainPage({ previewList }: MainPageProps) {
 
   const [activeTab, setActiveTab] = useState(CITY_NAMES[0]);
-  const filtered = previewList.filter((item) => item.city.name === activeTab);
+  const filteredPreviews = previewList.filter((item) => item.city.name === activeTab);
 
   return (
     <main className="page__main page__main--index">
@@ -26,7 +26,7 @@ export default function MainPage({ previewList }: MainPageProps) {
       </div>
       <div className="cities">
         <div className="cities__places-container container">
-          <PlaceList previewList={filtered} />
+          <PlaceList previewList={filteredPreviews} />
           <div className="cities__right-section">
             <Map />
           </div>

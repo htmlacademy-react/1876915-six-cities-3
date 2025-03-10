@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { PlaceCardDefault as D } from '../../const';
 
 type PlaceToFavoritesButtonProps = {
-  isFavorite: boolean;
+  isFavorite: boolean | undefined;
   onClick?: () => unknown;
   width?: number;
   height?: number;

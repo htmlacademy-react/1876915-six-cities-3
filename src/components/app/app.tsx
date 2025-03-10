@@ -26,7 +26,7 @@ export default function App({ previewList }: AppProps) {
             <Route path={AppRoute.Offers} element={<OfferPage />} />
             <Route path={AppRoute.Favorites} element={
               <PrivateRoute >
-                <FavoritesPage />
+                <FavoritesPage previewList={previewList} />
               </PrivateRoute>
             }
             />
