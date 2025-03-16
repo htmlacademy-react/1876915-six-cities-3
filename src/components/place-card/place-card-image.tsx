@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { AppRoute, PlaceCardDefault as D } from '../../const';
+import { AppRoute, ImageDefault as D } from '../../const';
 import { Link } from 'react-router-dom';
 
 type PlaceCardImageProps = {
@@ -10,7 +10,7 @@ type PlaceCardImageProps = {
   height?: number;
 }
 
-export default function PlaceCardImage({ id, url, className, width = D.DEFAULT_WIDTH, height = D.SMALL_HEIGHT }: PlaceCardImageProps) {
+export default function PlaceCardImage({ id, url, className, width = D.DefaultWidth, height = D.DefaultHeight }: PlaceCardImageProps) {
   return (
     <div className={clsx('place-card__image-wrapper', className)}>
       <Link to={`${AppRoute.Offer}/${id}`}>

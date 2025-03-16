@@ -10,6 +10,7 @@ import FavoritesPage from '../../pages/favorites-page/favorites-page';
 import PrivateRoute from '../private-route/private-route';
 import Layout from '../layout/layout';
 import NotFoundPageRedirect from '../../pages/not-found-page/not-found-page-redirect';
+import ScrollToTop from '../scroll-top/scroll-top';
 
 type AppProps = {
   previewList: PlacePreview[];
@@ -19,11 +20,12 @@ export default function App({ previewList }: AppProps) {
   return (
     <HelmetProvider>
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route path={AppRoute.Main} element={<Layout />}>
             <Route index element={<MainPage previewList={previewList} />} />
             <Route path={AppRoute.Login} element={<LoginPage />} />
-            <Route path={AppRoute.Offers} element={<OfferPage />} />
+            <Route path={AppRoute.Offers} element={<OfferPage previewList={previewList} />} />
             <Route path={AppRoute.Favorites} element={
               <PrivateRoute >
                 <FavoritesPage previewList={previewList} />

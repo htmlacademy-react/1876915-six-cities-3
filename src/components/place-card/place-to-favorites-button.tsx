@@ -1,22 +1,23 @@
 import clsx from 'clsx';
-import { PlaceCardDefault as D } from '../../const';
+import { ImageDefault as D } from '../../const';
 
 type PlaceToFavoritesButtonProps = {
+  className: string;
   isFavorite: boolean | undefined;
-  onClick?: () => unknown;
   width?: number;
   height?: number;
+  onClick?: () => unknown;
 }
 
-export default function PlaceToFavoritesButton({ isFavorite, onClick, width = D.BOOKMARK_ICON_WIDTH, height = D.BOOKMARK_ICON_HEIGHT }: PlaceToFavoritesButtonProps) {
+export default function PlaceToFavoritesButton({ className, isFavorite, onClick, width = D.CardBookmarkIconWidth, height = D.CardBookmarkIconHeight }: PlaceToFavoritesButtonProps) {
   return (
     <button
-      className={clsx('place-card__bookmark-button button', isFavorite && 'place-card__bookmark-button--active')}
+      className={clsx('button', `${className}__bookmark-button`, isFavorite && `${className}__bookmark-button--active`)}
       type="button"
       onClick={onClick}
     >
       <svg
-        className="place-card__bookmark-icon"
+        className={`${className}__bookmark-icon`}
         width={width}
         height={height}
       >

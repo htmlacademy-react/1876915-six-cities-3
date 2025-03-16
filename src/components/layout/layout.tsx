@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { useLayoutConfig } from '../../hooks/layout-config';
+import { useLayoutConfig } from '../../hooks/use-layout-config';
 import { getAuthorizationStatus } from '../../mocks/utils';
 import { Link, Outlet } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';

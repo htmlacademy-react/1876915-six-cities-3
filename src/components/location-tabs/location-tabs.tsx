@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
-import { MouseEventHandler } from 'react';
+import { ReactEventHandler } from 'react';
 
 type LocationTabsProps = {
   cityNames: string[];
@@ -8,12 +8,9 @@ type LocationTabsProps = {
   tabChangeHandler?: (tabName: string) => void;
 }
 
-export default function LocationTabs({ cityNames, activeTabName, tabChangeHandler }: LocationTabsProps): JSX.Element {
+export default function LocationTabs({ cityNames, activeTabName, tabChangeHandler }: LocationTabsProps) {
 
-  const tabClickHandler: MouseEventHandler = (evt) => {
-    const target = evt.target as HTMLElement;
-    const tabName = target.dataset.tabName;
-
+  const tabClickHandler: ReactEventHandler<HTMLLIElement> = ({ currentTarget: { dataset: { tabName } } }) => {
     if (tabName && (tabName !== activeTabName)) {
       tabChangeHandler?.(tabName);
     }
@@ -21,11 +18,15 @@ export default function LocationTabs({ cityNames, activeTabName, tabChangeHandle
 
   return (
     <section className="locations container">
-      <ul className="locations__list tabs__list" onClick={tabClickHandler}>
+      <ul className="locations__list tabs__list">
         {cityNames.map((name) => (
-          <li className="locations__item" key={name}>
-            <Link className={clsx('locations__item-link', 'tabs__item', (activeTabName === name) && 'tabs__item--active')} to="#" data-tab-name={name}>
-              <span data-tab-name={name}>{name}</span>
+          <li className="locations__item" key={`city-tab-${name}`} onClick={tabClickHandler} data-tab-name={name}>
+            <Link
+              className={clsx('locations__item-link', 'tabs__item', (activeTabName === name) && 'tabs__item--active')}
+              to="#"
+              onClick={(evt) => evt.preventDefault()}
+            >
+              <span>{name}</span>
             </Link>
           </li>
         ))}

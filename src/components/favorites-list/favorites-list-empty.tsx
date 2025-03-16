@@ -1,4 +1,3 @@
-
 export default function FavoritesListEmpty() {
   return (
     <section className="favorites favorites--empty">
