@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { PlacePreview } from '../../types';
-import { AppRoute, PlaceCardDefault as D } from '../../const';
+import { AppRoute, ImageDefault as D } from '../../const';
 import PlaceCard from '../place-card';
 
 type FavoritesItemProps = {
@@ -24,9 +24,9 @@ export default function FavoritesItem({ cityName, previewList }: FavoritesItemPr
             cardClassName='favorites__card'
             imageClassName='favorites__image-wrapper'
             preview={preview}
-            key={preview.id}
-            imageWidth={D.SMALL_WIDTH}
-            imageHeight={D.SMALL_WIDTH}
+            key={`favorite-group-${cityName}-card-${preview.id}`}
+            imageWidth={D.SmallWidth}
+            imageHeight={D.SmallWidth}
           />
         ))}
       </div>

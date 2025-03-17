@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { CITY_NAMES } from '../../const';
+import { CITY_NAMES, DEFAULT_CITY_NAME } from '../../const';
 import { PlacePreview } from '../../types';
 import PlaceList from '../../components/place-list/place-list';
-import Map from '../../components/map/map';
 import LocationTabs from '../../components/location-tabs/location-tabs';
+import clsx from 'clsx';
+import PlaceListEmpty from '../../components/place-list/place-list-empty';
 
 type MainPageProps = {
   previewList: PlacePreview[];
@@ -11,7 +12,7 @@ type MainPageProps = {
 
 export default function MainPage({ previewList }: MainPageProps) {
 
-  const [activeTab, setActiveTab] = useState(CITY_NAMES[0]);
+  const [activeTab, setActiveTab] = useState(DEFAULT_CITY_NAME);
   const filteredPreviews = previewList.filter((item) => item.city.name === activeTab);
 
   return (
@@ -25,13 +26,11 @@ export default function MainPage({ previewList }: MainPageProps) {
         />
       </div>
       <div className="cities">
-        <div className="cities__places-container container">
-          <PlaceList previewList={filteredPreviews} />
-          <div className="cities__right-section">
-            <Map />
-          </div>
+        <div className={clsx('cities__places-container', 'container', !filteredPreviews.length && 'cities__places-container--empty')}>
+          {filteredPreviews.length ? <PlaceList previewList={filteredPreviews} cityName={activeTab} /> : <PlaceListEmpty />}
         </div>
       </div>
     </main>
   );
 }
+

@@ -1,3 +1,5 @@
+import { SortType } from './const';
+
 export enum PlaceType {
   Apartment = 'apartment',
   Room = 'room',
@@ -56,3 +58,5 @@ export type Comment = {
   comment: string;
   rating: number;
 }
+
+export type PlaceSortType = keyof typeof SortType;

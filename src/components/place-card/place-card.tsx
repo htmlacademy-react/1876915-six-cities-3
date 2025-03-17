@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { PlacePreview } from '../../types';
-import PlaceCardMark from './place-card-mark';
+import PlaceMark from './place-mark';
 import PlaceCardImage from './place-card-image';
 import PlaceCardInfo from './place-card-info';
 
@@ -15,7 +15,7 @@ type PlaceListProps = {
 export default function PlaceCard({ preview, cardClassName, imageClassName, imageWidth, imageHeight }: PlaceListProps) {
   return (
     <article className={clsx('place-card', cardClassName)} data-card-id={preview.id}>
-      {preview.isPremium && <PlaceCardMark />}
+      {preview.isPremium && <PlaceMark className='place-card__mark'/>}
       <PlaceCardImage
         id={preview.id}
         url={preview.previewImage}

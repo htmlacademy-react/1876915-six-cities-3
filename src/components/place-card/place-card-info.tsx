@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { PlacePreview } from '../../types';
-import PlaceCardRating from './place-card-rating';
+import PlaceRating from './place-rating';
 import PlaceToFavoritesButton from './place-to-favorites-button';
 import { AppRoute } from '../../const';
 import { capitalizeFirstLetter } from '../../utils';
@@ -19,9 +19,13 @@ export default function PlaceCardInfo({ preview }: PlaceCardInfoProps) {
           <b className="place-card__price-value">€{price}</b>
           <span className="place-card__price-text">&nbsp;/&nbsp;night</span>
         </div>
-        <PlaceToFavoritesButton isFavorite={isFavorite} />
+        <PlaceToFavoritesButton className='place-card' isFavorite={isFavorite} />
       </div>
-      <PlaceCardRating rating={rating} />
+      <PlaceRating
+        rating={rating}
+        ratingClassName='place-card__rating'
+        starsClassName='place-card__stars'
+      />
       <h2 className="place-card__name">
         <Link to={`${AppRoute.Offer}/${id}`}>{title}</Link>
       </h2>

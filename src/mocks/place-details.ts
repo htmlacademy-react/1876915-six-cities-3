@@ -23,12 +23,12 @@ const placeDetails: Place[] = [
     },
     goods: ['Kitchen', 'Washer', 'Fridge', 'Wi-Fi', 'Air conditioning', 'Heating', 'Towels', 'Laptop friendly workspace', 'Washing machine', 'Coffee machine'],
     host: {
-      isPro: true,
+      isPro: false,
       name: 'Angelina',
       avatarUrl: 'https://15.design.htmlacademy.pro/static/host/avatar-angelina.jpg'
     },
     isPremium: true,
-    isFavorite: false,
+    isFavorite: true,
     rating: 2.5,
     bedrooms: 2,
     maxAdults: 2
@@ -100,7 +100,7 @@ const placeDetails: Place[] = [
   {
     id: '03a2d1bf-55e6-4bd7-88f7-9588990b211f',
     title: 'Perfectly located Castro',
-    description: 'Design interior in most sympathetic area! Complitely renovated, well-equipped, cosy studio in idyllic, over 100 years old wooden house. Calm street, fast connection to center and airport.',
+    description: 'Design interior in most sympathetic area! Completely renovated, well-equipped, cosy studio in idyllic, over 100 years old wooden house. Calm street, fast connection to center and airport.',
     type: PlaceType.Room,
     price: 191,
     images: ['https://15.design.htmlacademy.pro/static/hotel/14.jpg', 'https://15.design.htmlacademy.pro/static/hotel/18.jpg', 'https://15.design.htmlacademy.pro/static/hotel/1.jpg', 'https://15.design.htmlacademy.pro/static/hotel/16.jpg', 'https://15.design.htmlacademy.pro/static/hotel/3.jpg', 'https://15.design.htmlacademy.pro/static/hotel/8.jpg'],
@@ -188,7 +188,7 @@ const placeDetails: Place[] = [
       avatarUrl: 'https://15.design.htmlacademy.pro/static/host/avatar-angelina.jpg'
     },
     isPremium: true,
-    isFavorite: false,
+    isFavorite: true,
     rating: 2.5,
     bedrooms: 4,
     maxAdults: 6
@@ -252,7 +252,7 @@ const placeDetails: Place[] = [
       avatarUrl: 'https://15.design.htmlacademy.pro/static/host/avatar-angelina.jpg'
     },
     isPremium: true,
-    isFavorite: false,
+    isFavorite: true,
     rating: 2.3,
     bedrooms: 1,
     maxAdults: 3
