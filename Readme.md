@@ -2,7 +2,7 @@
 
 * Студент: [Сергей Софронов](https://htmlacademy.ru/profile/id1876915).
 * Наставник: [Артем Новосёлов](https://htmlacademy.ru/profile/id1195129).
-* Проект: ["Проект «Шесть городов»"](https://sergeysofronov.github.io/1876915-six-cities-3/).
+* Проект: [«Шесть городов»](https://sergeysofronov.github.io/1876915-six-cities-3/).
 
 ---
 

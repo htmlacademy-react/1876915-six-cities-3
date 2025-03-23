@@ -1,7 +1,7 @@
 import { Fragment, ReactEventHandler, useState } from 'react';
 import { MIN_REVIEW_LENGTH } from '../../const';
 
-const ratingGrades = ['perfect', 'good', 'not bad', 'badly', 'terribly'];
+const ratingGrades = ['perfect', 'good', 'not bad', 'badly', 'terribly'] as const;
 
 export default function ReviewForm() {
 
@@ -20,7 +20,7 @@ export default function ReviewForm() {
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         {
-          Array.from(ratingGrades, (grade, gradeIndex) => {
+          ratingGrades.map((grade, gradeIndex) => {
             const index = ratingGrades.length - gradeIndex;
             return (
               <Fragment key={grade}>
