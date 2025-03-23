@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { PlacePreview } from '../../types';
+import { PlacePreview } from '../../types/place';
 import PlaceStatusLabel from './place-status-label';
 import PlaceCardImage from './place-card-image';
 import PlaceCardInfo from './place-card-info';

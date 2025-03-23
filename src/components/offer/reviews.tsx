@@ -1,6 +1,6 @@
 import { AuthorizationStatus } from '../../const';
 import { getReviews } from '../../mocks/reviews';
-import { getAuthorizationStatus } from '../../mocks/utils';
+import { useAuthStatusSelector } from '../../store/user-process/selectors';
 import { getCommentDate } from '../../utils/comment';
 import PlaceRating from '../place-card/place-rating';
 import ReviewForm from './review-form';
@@ -41,7 +41,7 @@ export default function Reviews() {
           </ul>
         );
       })}
-      {(getAuthorizationStatus() === AuthorizationStatus.Auth) && <ReviewForm />}
+      {(useAuthStatusSelector() === AuthorizationStatus.Auth) && <ReviewForm />}
     </section>
   );
 }

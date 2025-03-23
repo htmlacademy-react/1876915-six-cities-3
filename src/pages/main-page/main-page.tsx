@@ -1,19 +1,17 @@
 import { useState } from 'react';
 import { CITY_NAMES, DEFAULT_CITY_NAME } from '../../const';
-import { PlacePreview } from '../../types';
 import PlaceList from '../../components/place-list/place-list';
 import LocationTabs from '../../components/location-tabs/location-tabs';
 import clsx from 'clsx';
 import PlaceListEmpty from '../../components/place-list/place-list-empty';
+import { usePreviewsSelector } from '../../store/place-data/selectors';
 
-type MainPageProps = {
-  previewList: PlacePreview[];
-}
+export default function MainPage() {
 
-export default function MainPage({ previewList }: MainPageProps) {
+  const previews = usePreviewsSelector();
 
   const [activeTab, setActiveTab] = useState(DEFAULT_CITY_NAME);
-  const filteredPreviews = previewList.filter((item) => item.city.name === activeTab);
+  const filteredPreviews = previews.filter((item) => item.city.name === activeTab);
 
   return (
     <main className="page__main page__main--index">

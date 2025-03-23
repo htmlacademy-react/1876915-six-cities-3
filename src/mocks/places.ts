@@ -1,4 +1,4 @@
-import { PlacePreview, PlaceType } from '../types';
+import { PlacePreview, PlaceType } from '../types/place';
 
 const places: PlacePreview[] = [
   {

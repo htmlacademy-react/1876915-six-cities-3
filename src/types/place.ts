@@ -1,4 +1,5 @@
-import { SortType } from './const';
+import { SortType } from '../const';
+import { User } from './user';
 
 export enum PlaceType {
   Apartment = 'apartment',
@@ -31,17 +32,6 @@ export type PlacePreview = {
   rating: number;
 }
 
-export type User = {
-  name: string;
-  avatarUrl: string;
-  isPro: boolean;
-}
-
-export type LoggedUser = User & {
-  email: string;
-  token: string;
-}
-
 export type Place = Omit<PlacePreview, 'previewImage'> & {
   description: string;
   bedrooms: number;
@@ -49,14 +39,6 @@ export type Place = Omit<PlacePreview, 'previewImage'> & {
   host: User;
   images: string[];
   maxAdults: number;
-}
-
-export type Comment = {
-  id: string;
-  date: string;
-  user: User;
-  comment: string;
-  rating: number;
 }
 
 export type PlaceSortType = keyof typeof SortType;

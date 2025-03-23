@@ -47,6 +47,14 @@ export enum AppRoute {
   NotFound = '/not-found',
 }
 
+export enum ApiRoute {
+  Previews = '/offers',
+  Login = '/login',
+  Logout = '/logout',
+  Favorites = '/favorite',
+  Nearby = '/nearby',
+}
+
 export enum AuthorizationStatus {
   Auth = 'Auth',
   NoAuth = 'NoAuth',
@@ -57,3 +65,9 @@ export const KeyCode = {
   ESC: 'Escape',
   ENTER: 'Enter',
 } as const;
+
+export enum NameSpace {
+  Data = 'DATA',
+  Place = 'PLACE',
+  User = 'USER',
+}

@@ -1,4 +1,4 @@
-import { PlacePreview } from '../../types';
+import { PlacePreview } from '../../types/place';
 import FavoritesItem from './favorite-item';
 
 type FavoritesListProps = {

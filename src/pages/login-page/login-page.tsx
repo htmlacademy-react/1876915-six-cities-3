@@ -1,11 +1,11 @@
 import { Helmet } from 'react-helmet-async';
-import { getAuthorizationStatus } from '../../mocks/utils';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { Navigate } from 'react-router-dom';
+import { useAuthStatusSelector } from '../../store/user-process/selectors';
 
 export default function LoginPage() {
   return (
-    (getAuthorizationStatus() === AuthorizationStatus.Auth) ?
+    (useAuthStatusSelector() === AuthorizationStatus.Auth) ?
       <Navigate to={AppRoute.Main} /> :
       <main className="page__main page__main--login">
         <Helmet>

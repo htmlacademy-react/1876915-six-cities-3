@@ -1,5 +1,5 @@
 import { SortType } from '../const';
-import { PlacePreview, PlaceSortType } from '../types';
+import { PlacePreview, PlaceSortType } from '../types/place';
 
 type Sort = {
   [item: string]: (preview: PlacePreview[]) => PlacePreview[];

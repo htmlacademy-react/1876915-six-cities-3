@@ -1,5 +1,5 @@
 import { MouseEventHandler, useState } from 'react';
-import { PlacePreview, PlaceSortType } from '../../types';
+import { PlacePreview, PlaceSortType } from '../../types/place';
 import PlaceCard from '../place-card';
 import PlaceSort from '../place-sort/place-sort';
 import { pluralize, sortPreview } from '../../utils';

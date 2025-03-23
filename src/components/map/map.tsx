@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import useMap from '../../hooks/use-map';
 import { useEffect, useRef } from 'react';
-import { Place, PlacePreview } from '../../types';
+import { Place, PlacePreview } from '../../types/place';
 import { BaseIconOptions, Icon, layerGroup, Marker } from 'leaflet';
 import { ActiveIcon, DefaultIcon } from '../../const';
 

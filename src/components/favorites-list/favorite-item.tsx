@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { PlacePreview } from '../../types';
+import { PlacePreview } from '../../types/place';
 import { AppRoute, ImageDefault as D } from '../../const';
 import PlaceCard from '../place-card';
 

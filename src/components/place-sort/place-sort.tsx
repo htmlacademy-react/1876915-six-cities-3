@@ -1,7 +1,7 @@
 import { KeyboardEventHandler, ReactEventHandler, useEffect, useState } from 'react';
 import { KeyCode, SortType } from '../../const';
 import clsx from 'clsx';
-import { PlaceSortType } from '../../types';
+import { PlaceSortType } from '../../types/place';
 
 type PlaceSortProps = {
   activeSortType: PlaceSortType;

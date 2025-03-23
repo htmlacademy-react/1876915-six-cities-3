@@ -1,26 +1,38 @@
 import { Helmet } from 'react-helmet-async';
 import { Navigate, useParams } from 'react-router-dom';
-import { getPlaceDetails } from '../../mocks/place-details';
 import { AppRoute, MAX_SHOWN_NEAR_PLACES } from '../../const';
-import { PlacePreview } from '../../types';
 import PlaceCard from '../../components/place-card';
 import Offer from '../../components/offer';
 import Map from '../../components/map/map';
+import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import { useNearOffersSelector, useOfferSelector } from '../../store/place-data/selectors';
+import { fetchNearbyPreviewsAction, fetchOfferAction } from '../../store/api-actions';
+import { useEffect } from 'react';
 
-type OfferPageProps = {
-  previewList: PlacePreview[];
-}
-
-export default function OfferPage({ previewList }: OfferPageProps) {
-
+export default function OfferPage() {
   const { id = '' } = useParams<'id'>();
-  const place = getPlaceDetails(id);
+  const { placeId, nearbyPreviews } = useNearOffersSelector();
+  const place = useOfferSelector();
+  const dispatch = useAppDispatch();
 
-  if (!place) {
+  const shouldOfferFetch = (placeId !== id) || !place;
+
+  useEffect(() => {
+    if (shouldOfferFetch) {
+      dispatch(fetchOfferAction(id));
+      dispatch(fetchNearbyPreviewsAction(id));
+    }
+  }, [dispatch, id, shouldOfferFetch]); //!!! Why dispatch & id ?
+
+  if (!id) {
     return <Navigate to={AppRoute.NotFound} />;
   }
 
-  const nearPlaces = previewList.filter((item) => item.id !== id).slice(0, MAX_SHOWN_NEAR_PLACES).concat({ ...place, previewImage: '' });
+  if (shouldOfferFetch) {
+    return null;
+  }
+
+  const previews = nearbyPreviews.slice(0, MAX_SHOWN_NEAR_PLACES).concat({ ...place, previewImage: '' });
 
   return (
     <main className="page__main page__main--offer">
@@ -29,7 +41,7 @@ export default function OfferPage({ previewList }: OfferPageProps) {
       </Helmet>
 
       <Offer place={place} >
-        <Map activePlace={place} places={nearPlaces} className='offer__map' />
+        <Map activePlace={place} places={previews} className='offer__map' />
       </Offer>
 
 
@@ -39,7 +51,7 @@ export default function OfferPage({ previewList }: OfferPageProps) {
             Other places in the neighbourhood
           </h2>
           <div className="near-places__list places__list">
-            {nearPlaces.map((preview) => (
+            {previews.map((preview) => (
               <PlaceCard
                 preview={preview}
                 cardClassName='near-places__card'
