@@ -3,7 +3,7 @@ type PlaceCardMarkProps = {
   text?: string;
 }
 
-export default function PlaceMark({ className, text = 'Premium' }: PlaceCardMarkProps) {
+export default function PlaceStatusLabel({ className, text = 'Premium' }: PlaceCardMarkProps) {
   return (
     <div className={className}>
       <span>{text}</span>

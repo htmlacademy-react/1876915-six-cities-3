@@ -5,7 +5,7 @@ import { PlaceSortType } from '../../types';
 
 type PlaceSortProps = {
   activeSortType: PlaceSortType;
-  sortChangeHandler?: (activeSortType: PlaceSortType) => void;
+  sortChangeHandler: (activeSortType: PlaceSortType) => void;
 };
 
 export default function PlaceSort({ sortChangeHandler, activeSortType }: PlaceSortProps) {

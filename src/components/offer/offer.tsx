@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { ImageDefault as D } from '../../const';
 import { Place } from '../../types';
 import { capitalizeFirstLetter, pluralize } from '../../utils';
-import PlaceMark from '../place-card/place-mark';
+import PlaceStatusLabel from '../place-card/place-status-label';
 import PlaceRating from '../place-card/place-rating';
 import PlaceToFavoritesButton from '../place-card/place-to-favorites-button';
 import Gallery from './gallery';
@@ -21,18 +21,12 @@ export default function Offer({ place, children }: PropsWithChildren<OfferProps>
       </div>
       <div className="offer__container container">
         <div className="offer__wrapper">
-          <PlaceMark className='offer__mark' />
+          <PlaceStatusLabel className='offer__mark' />
           <div className="offer__name-wrapper">
             <h1 className="offer__name">{place.title}</h1>Place
             <PlaceToFavoritesButton className='offer' isFavorite={place.isFavorite} width={D.OfferBookmarkIconWidth} height={D.OfferBookmarkIconHeight} />
           </div>
-          <PlaceRating
-            rating={place.rating}
-            ratingClassName='offer__rating'
-            starsClassName='offer__stars'
-            valueClassName='offer__rating-value'
-            shouldRatingShown
-          />
+          <PlaceRating placeRating={place.rating} className={{ rating: 'offer__rating', stars: 'offer__stars', value: 'offer__rating-value' }} shouldRatingShown />
 
           <ul className="offer__features">
             <li className="offer__feature offer__feature--entire">{capitalizeFirstLetter(place.type)}</li>

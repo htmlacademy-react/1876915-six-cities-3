@@ -3,7 +3,7 @@ import { getReviews } from '../../mocks/reviews';
 import { getAuthorizationStatus } from '../../mocks/utils';
 import { getCommentDate } from '../../utils/comment';
 import PlaceRating from '../place-card/place-rating';
-import ReviewForm from '../review/review-form';
+import ReviewForm from './review-form';
 
 export default function Reviews() {
 
@@ -33,11 +33,7 @@ export default function Reviews() {
                 <span className="reviews__user-name">{review.user.name}</span>
               </div>
               <div className="reviews__info">
-                <PlaceRating
-                  rating={review.rating}
-                  ratingClassName='reviews__rating'
-                  starsClassName='reviews__stars'
-                />
+                <PlaceRating placeRating={review.rating} className={{ rating: 'reviews__rating', stars: 'reviews__stars' }} />
                 <p className="reviews__text">{review.comment}</p>
                 <time className="reviews__time" dateTime={fullDate}>{date}</time>
               </div>

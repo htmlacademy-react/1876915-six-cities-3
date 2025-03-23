@@ -21,11 +21,7 @@ export default function PlaceCardInfo({ preview }: PlaceCardInfoProps) {
         </div>
         <PlaceToFavoritesButton className='place-card' isFavorite={isFavorite} />
       </div>
-      <PlaceRating
-        rating={rating}
-        ratingClassName='place-card__rating'
-        starsClassName='place-card__stars'
-      />
+      <PlaceRating placeRating={rating} className={{ rating: 'place-card__rating', stars: 'place-card__stars' }} />
       <h2 className="place-card__name">
         <Link to={`${AppRoute.Offer}/${id}`}>{title}</Link>
       </h2>
