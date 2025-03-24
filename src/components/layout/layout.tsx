@@ -1,13 +1,13 @@
 import clsx from 'clsx';
 import { useLayoutConfig } from '../../hooks/use-layout-config';
-import { getAuthorizationStatus } from '../../mocks/utils';
 import { Link, Outlet } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
+import { useAuthStatusSelector } from '../../store/user-process/selectors';
 
 export default function Layout() {
 
   const { pageClassName, shouldUserInfoRender, isLogoActive } = useLayoutConfig();
-  const isAuthorized = getAuthorizationStatus() === AuthorizationStatus.Auth;
+  const isAuthorized = useAuthStatusSelector() === AuthorizationStatus.Auth;
 
   return (
     <div className={`page ${pageClassName}`}>
@@ -51,6 +51,5 @@ export default function Layout() {
       </header>
       <Outlet />
     </div>
-
   );
 }

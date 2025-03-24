@@ -1,7 +1,6 @@
 import { HelmetProvider } from 'react-helmet-async';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import { PlacePreview } from '../../types';
 import MainPage from '../../pages/main-page/main-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import LoginPage from '../../pages/login-page/login-page';
@@ -12,31 +11,25 @@ import Layout from '../layout/layout';
 import NotFoundPageRedirect from '../../pages/not-found-page/not-found-page-redirect';
 import ScrollToTop from '../scroll-top/scroll-top';
 
-type AppProps = {
-  previewList: PlacePreview[];
-}
-
-export default function App({ previewList }: AppProps) {
+export default function App() {
   return (
     <HelmetProvider>
-      <BrowserRouter>
-        <ScrollToTop />
-        <Routes>
-          <Route path={AppRoute.Main} element={<Layout />}>
-            <Route index element={<MainPage previewList={previewList} />} />
-            <Route path={AppRoute.Login} element={<LoginPage />} />
-            <Route path={AppRoute.Offers} element={<OfferPage previewList={previewList} />} />
-            <Route path={AppRoute.Favorites} element={
-              <PrivateRoute >
-                <FavoritesPage previewList={previewList} />
-              </PrivateRoute>
-            }
-            />
-            <Route path='*' element={<NotFoundPageRedirect />} />
-            <Route path={AppRoute.NotFound} element={<NotFoundPage />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <ScrollToTop />
+      <Routes>
+        <Route path={AppRoute.Main} element={<Layout />}>
+          <Route index element={<MainPage />} />
+          <Route path={AppRoute.Login} element={<LoginPage />} />
+          <Route path={AppRoute.Offers} element={<OfferPage />} />
+          <Route path={AppRoute.Favorites} element={
+            <PrivateRoute >
+              <FavoritesPage />
+            </PrivateRoute>
+          }
+          />
+          <Route path='*' element={<NotFoundPageRedirect />} />
+          <Route path={AppRoute.NotFound} element={<NotFoundPage />} />
+        </Route>
+      </Routes>
     </HelmetProvider >
   );
 }
