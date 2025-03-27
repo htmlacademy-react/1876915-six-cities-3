@@ -4,5 +4,7 @@ import { PropsWithChildren } from 'react';
 import { useAuthStatusSelector } from '../../store/user-process/selectors';
 
 export default function PrivateRoute({ children }: PropsWithChildren) {
-  return (useAuthStatusSelector() === AuthorizationStatus.Auth) ? children : <Navigate to={AppRoute.Login} />;
+  const status = useAuthStatusSelector();
+
+  return (status === AuthorizationStatus.Auth) ? children : <Navigate to={AppRoute.Login} />;
 }

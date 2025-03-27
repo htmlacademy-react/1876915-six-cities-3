@@ -20,7 +20,6 @@ export default function useMap(mapRef: MutableRefObject<HTMLElement | null>, { l
       });
 
       const layer = new TileLayer(TEMPLATE_URL, { attribution: ATTRIBUTION_URL, });
-
       instance.addLayer(layer);
 
       setMap(instance);

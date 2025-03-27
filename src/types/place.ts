@@ -14,6 +14,8 @@ export type Location = {
   zoom: number;
 }
 
+export type MarkerType = Location & { id?: string };
+
 export type City = {
   name: string;
   location: Location;

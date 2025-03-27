@@ -8,6 +8,7 @@ import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { useNearOffersSelector, useOfferSelector } from '../../store/place-data/selectors';
 import { fetchNearbyPreviewsAction, fetchOfferAction } from '../../store/api-actions';
 import { useEffect } from 'react';
+import { PlacePreview } from '../../types/place';
 
 export default function OfferPage() {
   const { id = '' } = useParams<'id'>();
@@ -22,7 +23,7 @@ export default function OfferPage() {
       dispatch(fetchOfferAction(id));
       dispatch(fetchNearbyPreviewsAction(id));
     }
-  }, [dispatch, id, shouldOfferFetch]); //!!! Why dispatch & id ?
+  }, [dispatch, id, shouldOfferFetch]);
 
   if (!id) {
     return <Navigate to={AppRoute.NotFound} />;
@@ -32,7 +33,9 @@ export default function OfferPage() {
     return null;
   }
 
-  const previews = nearbyPreviews.slice(0, MAX_SHOWN_NEAR_PLACES).concat({ ...place, previewImage: '' });
+  const previews: PlacePreview[] = nearbyPreviews.slice(0, MAX_SHOWN_NEAR_PLACES);
+  const center = { id: place.id, ...place.city.location };
+  const markers = previews.map((item) => ({ id: item.id, ...item.location })).concat(center);
 
   return (
     <main className="page__main page__main--offer">
@@ -41,7 +44,7 @@ export default function OfferPage() {
       </Helmet>
 
       <Offer place={place} >
-        <Map activePlace={place} places={previews} className='offer__map' />
+        <Map center={center} markers={markers} activeMarkerId={placeId} className='offer__map' />
       </Offer>
 
 

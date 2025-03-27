@@ -4,8 +4,11 @@ import { Navigate } from 'react-router-dom';
 import { useAuthStatusSelector } from '../../store/user-process/selectors';
 
 export default function LoginPage() {
+  const status = useAuthStatusSelector();
+  const isAuthorized = (status === AuthorizationStatus.Auth);
+
   return (
-    (useAuthStatusSelector() === AuthorizationStatus.Auth) ?
+    (isAuthorized) ?
       <Navigate to={AppRoute.Main} /> :
       <main className="page__main page__main--login">
         <Helmet>

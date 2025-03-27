@@ -1,19 +1,20 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { DEFAULT_CITY_NAME, NameSpace } from '../../const';
+import { NameSpace } from '../../const';
 import { PlaceProcess } from '../../types/state';
+import { City } from '../../types/place';
 
 const initialState: PlaceProcess = {
-  activePlaceName: DEFAULT_CITY_NAME,
+  activeCity: null,
 };
 
 export const placeProcess = createSlice({
   name: NameSpace.Place,
   initialState,
   reducers: {
-    setActivePlaceName: (state, action: PayloadAction<string>) => {
-      state.activePlaceName = action.payload;
+    setActiveCity: (state, action: PayloadAction<City | null>) => {
+      state.activeCity = action.payload;
     },
   },
 });
 
-export const { setActivePlaceName } = placeProcess.actions;
+export const { setActiveCity: setActiveCityTab } = placeProcess.actions;
