@@ -1,18 +1,16 @@
 import clsx from 'clsx';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { ReactEventHandler } from 'react';
+import { cityNames } from '../../const';
 
-type LocationTabsProps = {
-  cityNames: string[];
-  activeTabName: string;
-  tabChangeHandler?: (tabName: string) => void;
-}
+export default function CityTabs() {
 
-export default function LocationTabs({ cityNames, activeTabName, tabChangeHandler }: LocationTabsProps) {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const activeCityName = searchParams.get('city');
 
   const tabClickHandler: ReactEventHandler<HTMLLIElement> = ({ currentTarget: { dataset: { tabName } } }) => {
-    if (tabName && (tabName !== activeTabName)) {
-      tabChangeHandler?.(tabName);
+    if (tabName && (tabName !== activeCityName)) {
+      setSearchParams([['city', tabName]]);
     }
   };
 
@@ -22,7 +20,7 @@ export default function LocationTabs({ cityNames, activeTabName, tabChangeHandle
         {cityNames.map((name) => (
           <li className="locations__item" key={`city-tab-${name}`} onClick={tabClickHandler} data-tab-name={name}>
             <Link
-              className={clsx('locations__item-link', 'tabs__item', (activeTabName === name) && 'tabs__item--active')}
+              className={clsx('locations__item-link', 'tabs__item', (activeCityName === name) && 'tabs__item--active')}
               to="#"
               onClick={(evt) => evt.preventDefault()}
             >

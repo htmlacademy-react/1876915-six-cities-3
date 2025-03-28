@@ -1,6 +1,6 @@
 import { store } from '../store/index.js';
 import { AuthorizationStatus } from '../const.js';
-import { Place, PlacePreview } from './place.js';
+import { City, Place, PlacePreview } from './place.js';
 
 export type State = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
@@ -10,7 +10,7 @@ export type UserProcess = {
 };
 
 export type PlaceProcess = {
-  activePlaceName: string;
+  activeCity: City | null;
 }
 
 export type PlaceData = {

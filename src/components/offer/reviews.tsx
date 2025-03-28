@@ -8,6 +8,8 @@ import ReviewForm from './review-form';
 export default function Reviews() {
 
   const reviews = getReviews();
+  const status = useAuthStatusSelector();
+  const isAuthorized = (status === AuthorizationStatus.Auth);
 
   return (
     <section className="offer__reviews reviews">
@@ -41,7 +43,7 @@ export default function Reviews() {
           </ul>
         );
       })}
-      {(useAuthStatusSelector() === AuthorizationStatus.Auth) && <ReviewForm />}
+      {isAuthorized && <ReviewForm />}
     </section>
   );
 }

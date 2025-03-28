@@ -23,6 +23,7 @@ const LayoutConfig: Record<string, Partial<typeof defaultConfig>> = {
 };
 
 export const useLayoutConfig = () => {
+
   const { pathname } = useLocation();
 
   return { ...defaultConfig, ...LayoutConfig[pathname as AppRoute] };

@@ -5,9 +5,11 @@ import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAuthStatusSelector } from '../../store/user-process/selectors';
 
 export default function Layout() {
-
   const { pageClassName, shouldUserInfoRender, isLogoActive } = useLayoutConfig();
-  const isAuthorized = useAuthStatusSelector() === AuthorizationStatus.Auth;
+
+  const status = useAuthStatusSelector();
+
+  const isAuthorized = (status === AuthorizationStatus.Auth);
 
   return (
     <div className={`page ${pageClassName}`}>
