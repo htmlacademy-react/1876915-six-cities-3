@@ -1,10 +1,10 @@
-import { PlacePreview, PlaceType } from '../types/place';
+import { PlacePreview, HousingType } from '../types';
 
 const places: PlacePreview[] = [
   {
     id: 'a7815e5b-73b0-4494-8cce-02a61eb1ea57',
     title: 'Waterfront with extraordinary view',
-    type: PlaceType.Apartment,
+    type: HousingType.Apartment,
     price: 390,
     previewImage: 'https://15.design.htmlacademy.pro/static/hotel/12.jpg',
     city: {
@@ -27,7 +27,7 @@ const places: PlacePreview[] = [
   {
     id: '2078b191-fdc7-4c28-aca4-81f57525db9e',
     title: 'Beautiful & luxurious apartment at great location',
-    type: PlaceType.Apartment,
+    type: HousingType.Apartment,
     price: 247,
     previewImage: 'https://15.design.htmlacademy.pro/static/hotel/17.jpg',
     city: {
@@ -50,7 +50,7 @@ const places: PlacePreview[] = [
   {
     id: '75ca5879-fbb0-40f2-a85d-98419c1a84e0',
     title: 'Canal View Prinsengracht',
-    type: PlaceType.Apartment,
+    type: HousingType.Apartment,
     price: 237,
     previewImage: 'https://15.design.htmlacademy.pro/static/hotel/1.jpg',
     city: {
@@ -73,7 +73,7 @@ const places: PlacePreview[] = [
   {
     id: '03a2d1bf-55e6-4bd7-88f7-9588990b211f',
     title: 'Perfectly located Castro',
-    type: PlaceType.Room,
+    type: HousingType.Room,
     price: 191,
     previewImage: 'https://15.design.htmlacademy.pro/static/hotel/3.jpg',
     city: {
@@ -96,7 +96,7 @@ const places: PlacePreview[] = [
   {
     id: 'a6992e16-9609-4055-892f-1c2b11f2255f',
     title: 'The Pondhouse - A Magical Place',
-    type: PlaceType.House,
+    type: HousingType.House,
     price: 328,
     previewImage: 'https://15.design.htmlacademy.pro/static/hotel/20.jpg',
     city: {
@@ -119,7 +119,7 @@ const places: PlacePreview[] = [
   {
     id: '12fa6bbd-6b7a-4051-b9a7-1f746f74d1b2',
     title: 'Loft Studio in the Central Area',
-    type: PlaceType.Hotel,
+    type: HousingType.Hotel,
     price: 262,
     previewImage: 'https://15.design.htmlacademy.pro/static/hotel/1.jpg',
     city: {
@@ -142,7 +142,7 @@ const places: PlacePreview[] = [
   {
     id: '58930ba0-c352-4475-8fba-8fd475be1f52',
     title: 'Penthouse, 4-5 rooms + 5 balconies',
-    type: PlaceType.House,
+    type: HousingType.House,
     price: 910,
     previewImage: 'https://15.design.htmlacademy.pro/static/hotel/3.jpg',
     city: {
@@ -165,7 +165,7 @@ const places: PlacePreview[] = [
   {
     id: '9b9f55d9-5f34-43ec-80d0-f37c0d55f407',
     title: 'House in countryside',
-    type: PlaceType.Room,
+    type: HousingType.Room,
     price: 267,
     previewImage: 'https://15.design.htmlacademy.pro/static/hotel/5.jpg',
     city: {

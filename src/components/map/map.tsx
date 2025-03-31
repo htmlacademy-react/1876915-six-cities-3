@@ -1,22 +1,22 @@
 import clsx from 'clsx';
-import useMap from '../../hooks/use-map';
 import { useEffect, useRef } from 'react';
-import { MarkerType } from '../../types/place';
+import { MarkerType } from '../../types';
 import { BaseIconOptions, Icon, LayerGroup, layerGroup, Marker } from 'leaflet';
 import { ActiveIcon, DefaultIcon } from '../../const';
+import { useMap } from '../../hooks';
+import { useActiveMarkerSelector } from '../../store/place-process/selectors';
 
 const defaultIcon = new Icon(DefaultIcon as BaseIconOptions);
 const activeIcon = new Icon(ActiveIcon as BaseIconOptions);
 
 type MapProps = {
-  activeMarkerId: string;
   markers: MarkerType[];
-  center: MarkerType;
   className: string;
 }
 
-export default function Map({ center, markers, activeMarkerId, className }: MapProps) {
+export default function Map({ markers, className }: MapProps) {
 
+  const center = useActiveMarkerSelector();
   const mapRef = useRef(null);
   const map = useMap(mapRef, center);
   const markerLayer = useRef<LayerGroup>(layerGroup());
@@ -33,11 +33,11 @@ export default function Map({ center, markers, activeMarkerId, className }: MapP
     if (map) {
       markers.forEach(({ id, latitude, longitude }) => {
         new Marker([latitude, longitude])
-          .setIcon((id === activeMarkerId) ? activeIcon : defaultIcon)
+          .setIcon((id === center.id) ? activeIcon : defaultIcon)
           .addTo(markerLayer.current);
       });
     }
-  }, [map, markers, activeMarkerId]);
+  }, [map, markers, center.id]);
 
   return (
     <section ref={mapRef} className={clsx('map', className)} />

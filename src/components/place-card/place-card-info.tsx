@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { PlacePreview } from '../../types/place';
+import { PlacePreview } from '../../types';
 import PlaceRating from './place-rating';
 import PlaceToFavoritesButton from './place-to-favorites-button';
 import { AppRoute } from '../../const';

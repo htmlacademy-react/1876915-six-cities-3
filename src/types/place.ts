@@ -1,34 +1,36 @@
-import { SortType } from '../const';
+import { CitiesDefaults, SortType } from '../const';
 import { User } from './user';
 
-export enum PlaceType {
+export enum HousingType {
   Apartment = 'apartment',
   Room = 'room',
   House = 'house',
   Hotel = 'hotel',
 }
 
-export type Location = {
+export type PlaceLocation = {
   latitude: number;
   longitude: number;
   zoom: number;
 }
 
-export type MarkerType = Location & { id?: string };
+export type MarkerType = PlaceLocation & { id?: string };
+
+export type CityName = typeof CitiesDefaults[number]['name'];
 
 export type City = {
-  name: string;
-  location: Location;
+  name: CityName;
+  location: PlaceLocation;
 }
 
 export type PlacePreview = {
   id: string;
   title: string;
-  type: PlaceType;
+  type: HousingType;
   price: number;
   previewImage: string;
   city: City;
-  location: Location;
+  location: PlaceLocation;
   isFavorite: boolean;
   isPremium: boolean;
   rating: number;

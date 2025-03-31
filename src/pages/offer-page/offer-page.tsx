@@ -4,13 +4,18 @@ import { AppRoute, MAX_SHOWN_NEAR_PLACES } from '../../const';
 import PlaceCard from '../../components/place-card';
 import Offer from '../../components/offer';
 import Map from '../../components/map/map';
-import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { useNearOffersSelector, useOfferSelector } from '../../store/place-data/selectors';
 import { fetchNearbyPreviewsAction, fetchOfferAction } from '../../store/api-actions';
 import { useEffect } from 'react';
-import { PlacePreview } from '../../types/place';
+import { Place, PlacePreview } from '../../types';
+import { useActionCreator, useAppDispatch } from '../../hooks';
+import { placeProcessActions } from '../../store/place-process/place-process';
+
+const getLocation = (place: Place) => ({ id: place.id, ...place.location, zoom:place.city.location.zoom });
 
 export default function OfferPage() {
+  const { setActiveMarker } = useActionCreator(placeProcessActions);
+
   const { id = '' } = useParams<'id'>();
   const { placeId, nearbyPreviews } = useNearOffersSelector();
   const place = useOfferSelector();
@@ -25,6 +30,12 @@ export default function OfferPage() {
     }
   }, [dispatch, id, shouldOfferFetch]);
 
+  useEffect(() => {
+    if (place) {
+      setActiveMarker(getLocation(place));
+    }
+  });
+
   if (!id) {
     return <Navigate to={AppRoute.NotFound} />;
   }
@@ -33,8 +44,9 @@ export default function OfferPage() {
     return null;
   }
 
+
   const previews: PlacePreview[] = nearbyPreviews.slice(0, MAX_SHOWN_NEAR_PLACES);
-  const center = { id: place.id, ...place.city.location };
+  const center = getLocation(place);
   const markers = previews.map((item) => ({ id: item.id, ...item.location })).concat(center);
 
   return (
@@ -44,7 +56,7 @@ export default function OfferPage() {
       </Helmet>
 
       <Offer place={place} >
-        <Map center={center} markers={markers} activeMarkerId={placeId} className='offer__map' />
+        <Map markers={markers} className='offer__map' />
       </Offer>
 
 

@@ -1,5 +1,5 @@
-import { State } from '../../types/state';
+import { State } from '../../types';
 import { NameSpace } from '../../const';
-import { useAppSelector } from '../../hooks/use-app-selector';
+import { useAppSelector } from '../../hooks';
 
 export const useAuthStatusSelector = () => useAppSelector((state: Pick<State, NameSpace.User>) => state.USER.authorizationStatus);

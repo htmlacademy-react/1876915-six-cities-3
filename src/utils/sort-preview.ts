@@ -1,5 +1,5 @@
 import { SortType } from '../const';
-import { PlacePreview, PlaceSortType } from '../types/place';
+import { PlacePreview, PlaceSortType } from '../types';
 
 type Sort = {
   [item: string]: (preview: PlacePreview[]) => PlacePreview[];
@@ -11,9 +11,9 @@ const sortByRating = (first: PlacePreview, second: PlacePreview) => second.ratin
 
 const sort: Sort = {
   [SortType.Popular]: (preview) => preview,
-  [SortType.HighToLow]: (preview) => [...preview].sort(sortByPriceIncrease),
-  [SortType.LowToHigh]: (preview) => [...preview].sort(sortByPriceDecrease),
-  [SortType.TopRated]: (preview) => [...preview].sort(sortByRating),
+  [SortType.HighToLow]: (preview) => preview.toSorted(sortByPriceIncrease),
+  [SortType.LowToHigh]: (preview) => preview.toSorted(sortByPriceDecrease),
+  [SortType.TopRated]: (preview) => preview.toSorted(sortByRating),
 };
 
 export const sortPreview = (preview: PlacePreview[], sortType: PlaceSortType) => (sort[SortType[sortType]])(preview);

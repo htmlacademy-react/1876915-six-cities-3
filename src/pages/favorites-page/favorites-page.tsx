@@ -5,7 +5,7 @@ import FavoritesList from '../../components/favorites-list/favorites-list';
 import { useEffect } from 'react';
 import clsx from 'clsx';
 import { useFavoritePreviewsSelector } from '../../store/place-data/selectors';
-import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import { useAppDispatch } from '../../hooks';
 import { fetchFavoritePreviewsAction } from '../../store/api-actions';
 
 export default function FavoritesPage() {
@@ -28,7 +28,7 @@ export default function FavoritesPage() {
           <title>6 Cities.Favorite places</title>
         </Helmet>
         <div className="page__favorites-container container">
-          {previews.length ? <FavoritesList previewList={previews} /> : <FavoritesListEmpty />}
+          {previews.length ? <FavoritesList previews={previews} /> : <FavoritesListEmpty />}
         </div>
       </main>
       <Footer />

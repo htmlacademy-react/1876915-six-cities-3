@@ -1,11 +1,11 @@
-import { Place, PlaceType } from '../types/place';
+import { Place, HousingType } from '../types';
 
 const placeDetails: Place[] = [
   {
     id: 'a7815e5b-73b0-4494-8cce-02a61eb1ea57',
     title: 'Waterfront with extraordinary view',
     description: 'This is a place for dreamers to reset, reflect, and create. Designed with a \'slow\' pace in mind, our hope is that you enjoy every part of your stay; from making local coffee by drip in the morning, choosing the perfect record to put on as the sun sets.',
-    type: PlaceType.Apartment,
+    type: HousingType.Apartment,
     price: 390,
     images: ['https://15.design.htmlacademy.pro/static/hotel/15.jpg', 'https://15.design.htmlacademy.pro/static/hotel/6.jpg', 'https://15.design.htmlacademy.pro/static/hotel/18.jpg', 'https://15.design.htmlacademy.pro/static/hotel/12.jpg', 'https://15.design.htmlacademy.pro/static/hotel/4.jpg', 'https://15.design.htmlacademy.pro/static/hotel/11.jpg'],
     city: {
@@ -37,7 +37,7 @@ const placeDetails: Place[] = [
     id: '2078b191-fdc7-4c28-aca4-81f57525db9e',
     title: 'Beautiful & luxurious apartment at great location',
     description: 'This is a place for dreamers to reset, reflect, and create. Designed with a \'slow\' pace in mind, our hope is that you enjoy every part of your stay; from making local coffee by drip in the morning, choosing the perfect record to put on as the sun sets.',
-    type: PlaceType.Apartment,
+    type: HousingType.Apartment,
     price: 247,
     images: ['https://15.design.htmlacademy.pro/static/hotel/12.jpg', 'https://15.design.htmlacademy.pro/static/hotel/18.jpg', 'https://15.design.htmlacademy.pro/static/hotel/17.jpg', 'https://15.design.htmlacademy.pro/static/hotel/6.jpg', 'https://15.design.htmlacademy.pro/static/hotel/13.jpg', 'https://15.design.htmlacademy.pro/static/hotel/5.jpg'],
     city: {
@@ -69,7 +69,7 @@ const placeDetails: Place[] = [
     id: '75ca5879-fbb0-40f2-a85d-98419c1a84e0',
     title: 'Canal View Prinsengracht',
     description: 'Discover daily local life in city center, friendly neighborhood, clandestine casino, karaoke, old-style artisans, art gallery and artist studio downstairs.',
-    type: PlaceType.Apartment,
+    type: HousingType.Apartment,
     price: 237,
     images: ['https://15.design.htmlacademy.pro/static/hotel/18.jpg', 'https://15.design.htmlacademy.pro/static/hotel/16.jpg', 'https://15.design.htmlacademy.pro/static/hotel/20.jpg', 'https://15.design.htmlacademy.pro/static/hotel/11.jpg', 'https://15.design.htmlacademy.pro/static/hotel/10.jpg', 'https://15.design.htmlacademy.pro/static/hotel/14.jpg'],
     city: {
@@ -101,7 +101,7 @@ const placeDetails: Place[] = [
     id: '03a2d1bf-55e6-4bd7-88f7-9588990b211f',
     title: 'Perfectly located Castro',
     description: 'Design interior in most sympathetic area! Completely renovated, well-equipped, cosy studio in idyllic, over 100 years old wooden house. Calm street, fast connection to center and airport.',
-    type: PlaceType.Room,
+    type: HousingType.Room,
     price: 191,
     images: ['https://15.design.htmlacademy.pro/static/hotel/14.jpg', 'https://15.design.htmlacademy.pro/static/hotel/18.jpg', 'https://15.design.htmlacademy.pro/static/hotel/1.jpg', 'https://15.design.htmlacademy.pro/static/hotel/16.jpg', 'https://15.design.htmlacademy.pro/static/hotel/3.jpg', 'https://15.design.htmlacademy.pro/static/hotel/8.jpg'],
     city: {
@@ -133,7 +133,7 @@ const placeDetails: Place[] = [
     id: 'a6992e16-9609-4055-892f-1c2b11f2255f',
     title: 'The Pondhouse - A Magical Place',
     description: 'This is a place for dreamers to reset, reflect, and create. Designed with a \'slow\' pace in mind, our hope is that you enjoy every part of your stay; from making local coffee by drip in the morning, choosing the perfect record to put on as the sun sets.',
-    type: PlaceType.House,
+    type: HousingType.House,
     price: 328,
     images: ['https://15.design.htmlacademy.pro/static/hotel/3.jpg', 'https://15.design.htmlacademy.pro/static/hotel/19.jpg', 'https://15.design.htmlacademy.pro/static/hotel/8.jpg', 'https://15.design.htmlacademy.pro/static/hotel/1.jpg', 'https://15.design.htmlacademy.pro/static/hotel/10.jpg', 'https://15.design.htmlacademy.pro/static/hotel/13.jpg'],
     city: {
@@ -165,7 +165,7 @@ const placeDetails: Place[] = [
     id: '12fa6bbd-6b7a-4051-b9a7-1f746f74d1b2',
     title: 'Loft Studio in the Central Area',
     description: 'Relax, rejuvenate and unplug in this ultimate rustic getaway experience in the country. In our beautiful screened Pondhouse, you can gaze at the stars and listen to the sounds of nature from your cozy warm bed.',
-    type: PlaceType.Hotel,
+    type: HousingType.Hotel,
     price: 262,
     images: ['https://15.design.htmlacademy.pro/static/hotel/9.jpg', 'https://15.design.htmlacademy.pro/static/hotel/16.jpg', 'https://15.design.htmlacademy.pro/static/hotel/7.jpg', 'https://15.design.htmlacademy.pro/static/hotel/18.jpg', 'https://15.design.htmlacademy.pro/static/hotel/11.jpg', 'https://15.design.htmlacademy.pro/static/hotel/4.jpg'],
     city: {
@@ -197,7 +197,7 @@ const placeDetails: Place[] = [
     id: '58930ba0-c352-4475-8fba-8fd475be1f52',
     title: 'Penthouse, 4-5 rooms + 5 balconies',
     description: 'Discover daily local life in city center, friendly neighborhood, clandestine casino, karaoke, old-style artisans, art gallery and artist studio downstairs.',
-    type: PlaceType.House,
+    type: HousingType.House,
     price: 910,
     images: ['https://15.design.htmlacademy.pro/static/hotel/5.jpg', 'https://15.design.htmlacademy.pro/static/hotel/18.jpg', 'https://15.design.htmlacademy.pro/static/hotel/17.jpg', 'https://15.design.htmlacademy.pro/static/hotel/16.jpg', 'https://15.design.htmlacademy.pro/static/hotel/6.jpg', 'https://15.design.htmlacademy.pro/static/hotel/19.jpg'],
     city: {
@@ -229,7 +229,7 @@ const placeDetails: Place[] = [
     id: '9b9f55d9-5f34-43ec-80d0-f37c0d55f407',
     title: 'House in countryside',
     description: 'Relax, rejuvenate and unplug in this ultimate rustic getaway experience in the country. In our beautiful screened Pondhouse, you can gaze at the stars and listen to the sounds of nature from your cozy warm bed.',
-    type: PlaceType.Room,
+    type: HousingType.Room,
     price: 267,
     images: ['https://15.design.htmlacademy.pro/static/hotel/6.jpg', 'https://15.design.htmlacademy.pro/static/hotel/4.jpg', 'https://15.design.htmlacademy.pro/static/hotel/19.jpg', 'https://15.design.htmlacademy.pro/static/hotel/8.jpg', 'https://15.design.htmlacademy.pro/static/hotel/14.jpg', 'https://15.design.htmlacademy.pro/static/hotel/20.jpg'],
     city: {
