@@ -93,6 +93,7 @@ export enum ApiRoute {
   Logout = '/logout',
   Favorites = '/favorite',
   Nearby = '/nearby',
+  Comments = '/comments',
 }
 
 export enum AuthorizationStatus {

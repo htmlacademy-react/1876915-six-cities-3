@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { ApiRoute, AppRoute } from '../const';
-import { Place, PlacePreview } from '../types';
+import { Place, PlaceComment, PlacePreview } from '../types';
 import { AppDispatch, State } from '../types';
 import { LoggedUser } from '../types';
 import { AuthData } from '../types';
@@ -30,18 +30,26 @@ export const fetchFavoritePreviewsAction = createAsyncThunk<PlacePreview[], unde
   },
 );
 
-export const fetchNearbyPreviewsAction = createAsyncThunk<{ placeId: string; previews: PlacePreview[] }, string, ThunkConfig>(
+export const fetchNearbyPreviewsAction = createAsyncThunk<PlacePreview[], string, ThunkConfig>(
   'data/fetchNearbyPreviews',
   async (placeId, { extra: api }) => {
     const { data } = await api.get<PlacePreview[]>(`${ApiRoute.Previews}/${placeId}${ApiRoute.Nearby}`);
-    return { placeId, previews: data };
+    return data;
   },
 );
 
-export const fetchOfferAction = createAsyncThunk<Place, string, ThunkConfig>(
-  'data/fetchOffer',
+export const fetchPlaceAction = createAsyncThunk<Place, string, ThunkConfig>(
+  'data/fetchPlace',
   async (placeId, { extra: api }) => {
     const { data } = await api.get<Place>(`${ApiRoute.Previews}/${placeId}`);
+    return data;
+  },
+);
+
+export const fetchPlaceCommentsAction = createAsyncThunk<PlaceComment[], string, ThunkConfig>(
+  'data/fetchPlaceComments',
+  async (placeId, { extra: api }) => {
+    const { data } = await api.get<PlaceComment[]>(`${ApiRoute.Comments}/${placeId}`);
     return data;
   },
 );
@@ -55,7 +63,7 @@ export const checkAuthAction = createAsyncThunk<void, undefined, ThunkConfig>(
 
 export const loginAction = createAsyncThunk<void, AuthData, ThunkConfig>(
   'user/login',
-  async ({ email: email, password }, { dispatch, extra: api }) => {
+  async ({ email, password }, { dispatch, extra: api }) => {
     const { data: { token } } = await api.post<LoggedUser>(ApiRoute.Login, { email, password });
     saveToken(token);
     dispatch(redirectToRoute(AppRoute.Main));

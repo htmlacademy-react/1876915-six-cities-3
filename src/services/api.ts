@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import { store } from '../store';
 import { getToken } from './token';
-import { setAuthorizationStatus } from '../store/user-process/user-process';
+import { userProcessActions } from '../store/user-process/user-process';
 import { AuthorizationStatus } from '../const';
 import { StatusCodes } from 'http-status-codes';
 import { toast } from 'react-toastify';
@@ -39,7 +39,7 @@ const onResponseError = (error: AxiosError<AxiosResponseDataType>): Promise<Axio
 
   if (response) {
     if (response.status === +StatusCodes.UNAUTHORIZED) {
-      store.dispatch(setAuthorizationStatus(AuthorizationStatus.NoAuth));
+      store.dispatch(userProcessActions.setAuthorizationStatus(AuthorizationStatus.NoAuth));
     }
 
     if (shouldDisplayError(response.status)) {
@@ -50,7 +50,7 @@ const onResponseError = (error: AxiosError<AxiosResponseDataType>): Promise<Axio
   return Promise.reject(error);
 };
 
-const createAPI = (): AxiosInstance => {
+export const createAPI = (): AxiosInstance => {
   const api = axios.create({
     baseURL: BACKEND_URL,
     timeout: REQUEST_TIMEOUT,
@@ -61,5 +61,3 @@ const createAPI = (): AxiosInstance => {
 
   return api;
 };
-
-export { createAPI };
