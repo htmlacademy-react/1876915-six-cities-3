@@ -1,29 +1,23 @@
-import { PlacePreview } from '../../types/place';
+import { PlacePreview } from '../../types';
 import FavoritesItem from './favorite-item';
 
 type FavoritesListProps = {
-  previewList: PlacePreview[];
+  previews: PlacePreview[];
 }
 
-const groupPreviews = (previewList: PlacePreview[]) => {
-  const groupedPreviews = previewList.reduce<Record<string, PlacePreview[]>>((accumulator, preview: PlacePreview) => {
-    const key = preview.city.name;
-    if (!accumulator[key]) {
-      accumulator[key] = [];
-    }
-    accumulator[key].push(preview);
-    return accumulator;
-  }, {});
+export default function FavoritesList({ previews }: FavoritesListProps) {
 
-  return Object.entries(groupedPreviews);
-};
+  const grouped = Object.entries(Object.groupBy(previews, (preview) => preview.city.name));
 
-export default function FavoritesList({ previewList }: FavoritesListProps) {
+  if (!grouped.length) {
+    return;
+  }
+
   return (
     <section className="favorites">
       <h1 className="favorites__title">Saved listing</h1>
       <ul className="favorites__list">
-        {groupPreviews(previewList).map(([cityName, previews]) => <FavoritesItem cityName={cityName} previewList={previews} key={`favorite-group-${cityName}`} />)}
+        {grouped.map(([cityName, groupedPreviews]) => <FavoritesItem cityName={cityName} previews={groupedPreviews} key={`favorite-group-${cityName}`} />)}
       </ul>
     </section>
   );

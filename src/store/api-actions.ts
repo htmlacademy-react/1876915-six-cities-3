@@ -1,10 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { ApiRoute, AppRoute } from '../const';
-import { Place, PlacePreview } from '../types/place';
-import { AppDispatch, State } from '../types/state';
-import { LoggedUser } from '../types/user';
-import { AuthData } from '../types/auth-data';
+import { Place, PlacePreview } from '../types';
+import { AppDispatch, State } from '../types';
+import { LoggedUser } from '../types';
+import { AuthData } from '../types';
 import { dropToken, saveToken } from '../services/token';
 import { redirectToRoute } from './action';
 

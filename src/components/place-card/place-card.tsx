@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { MarkerType, PlacePreview } from '../../types/place';
+import { MarkerType, PlacePreview } from '../../types';
 import PlaceStatusLabel from './place-status-label';
 import PlaceCardImage from './place-card-image';
 import PlaceCardInfo from './place-card-info';
@@ -10,15 +10,14 @@ type PlaceListProps = {
   imageClassName: string;
   imageWidth?: number;
   imageHeight?: number;
-  onMouseEnterCallback?: (preview: MarkerType) => void;
-  onMouseLeaveCallback?: (preview: MarkerType) => void;
+  mouseEventHandler?: (marker: MarkerType) => void;
 }
 
-export default function PlaceCard({ preview, cardClassName, imageClassName, imageWidth, imageHeight, onMouseEnterCallback, onMouseLeaveCallback }: PlaceListProps) {
+export default function PlaceCard({ preview, cardClassName, imageClassName, imageWidth, imageHeight, mouseEventHandler, }: PlaceListProps) {
   return (
     <article className={clsx('place-card', cardClassName)}
-      onMouseEnter={() => onMouseEnterCallback?.({ id: preview.id, ...preview.location })}
-      onMouseLeave={() => onMouseLeaveCallback?.({ id: preview.id, ...preview.location })}
+      onMouseEnter={() => mouseEventHandler?.({ ...preview.location, id: preview.id })}
+      onMouseLeave={() => mouseEventHandler?.({ ...preview.city.location })}
     >
       {preview.isPremium && <PlaceStatusLabel className='place-card__mark' />}
       <PlaceCardImage

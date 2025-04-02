@@ -1,8 +1,9 @@
 import clsx from 'clsx';
-import { useLayoutConfig } from '../../hooks/use-layout-config';
+import { useLayoutConfig } from '../../hooks';
 import { Link, Outlet } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAuthStatusSelector } from '../../store/user-process/selectors';
+import { MouseEventHandler } from 'react';
 
 export default function Layout() {
   const { pageClassName, shouldUserInfoRender, isLogoActive } = useLayoutConfig();
@@ -11,13 +12,19 @@ export default function Layout() {
 
   const isAuthorized = (status === AuthorizationStatus.Auth);
 
+  const logoClickHandler: MouseEventHandler<HTMLAnchorElement> = (evt) => {
+    if (isLogoActive) {
+      evt.preventDefault();
+    }
+  };
+
   return (
     <div className={`page ${pageClassName}`}>
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <Link className={clsx('header__logo-link', isLogoActive && 'header__logo-link--active')} to={AppRoute.Main}>
+              <Link className={clsx('header__logo-link', isLogoActive && 'header__logo-link--active')} to={AppRoute.Main} onClick={logoClickHandler}>
                 <img
                   className="header__logo"
                   src="img/logo.svg"

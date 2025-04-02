@@ -1,6 +1,6 @@
 import { store } from '../store/index.js';
 import { AuthorizationStatus } from '../const.js';
-import { City, Place, PlacePreview } from './place.js';
+import { MarkerType, Place, PlacePreview } from './place.js';
 
 export type State = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
@@ -10,10 +10,11 @@ export type UserProcess = {
 };
 
 export type PlaceProcess = {
-  activeCity: City | null;
+  activeMarker: MarkerType;
 }
 
 export type PlaceData = {
+  isPreviewsLoading: boolean;
   previews: PlacePreview[] | [];
   favorites: PlacePreview[] | [];
   offer: Place | null;

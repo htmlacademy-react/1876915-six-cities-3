@@ -1,14 +1,14 @@
 import { Link } from 'react-router-dom';
-import { PlacePreview } from '../../types/place';
+import { PlacePreview } from '../../types';
 import { AppRoute, ImageDefault as D } from '../../const';
 import PlaceCard from '../place-card';
 
 type FavoritesItemProps = {
-  previewList: PlacePreview[];
+  previews: PlacePreview[];
   cityName: string;
 }
 
-export default function FavoritesItem({ cityName, previewList }: FavoritesItemProps) {
+export default function FavoritesItem({ cityName, previews }: FavoritesItemProps) {
   return (
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
@@ -19,7 +19,7 @@ export default function FavoritesItem({ cityName, previewList }: FavoritesItemPr
         </div>
       </div>
       <div className="favorites__places">
-        {previewList.map((preview) => (
+        {previews.map((preview) => (
           <PlaceCard
             cardClassName='favorites__card'
             imageClassName='favorites__image-wrapper'

@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
-import { PlaceData } from '../../types/state';
+import { PlaceData } from '../../types';
 import { fetchFavoritePreviewsAction, fetchNearbyPreviewsAction, fetchOfferAction, fetchPreviewsAction } from '../api-actions';
 
 const initialState: PlaceData = {
+  isPreviewsLoading: false,
   previews: [],
   favorites: [],
   offer: null,
@@ -21,6 +22,10 @@ export const placeData = createSlice({
     builder
       .addCase(fetchPreviewsAction.fulfilled, (state, { payload }) => {
         state.previews = payload;
+        state.isPreviewsLoading = false;
+      })
+      .addCase(fetchPreviewsAction.pending, (state) => {
+        state.isPreviewsLoading = true;
       })
       .addCase(fetchFavoritePreviewsAction.fulfilled, (state, { payload }) => {
         state.favorites = payload;
@@ -37,3 +42,6 @@ export const placeData = createSlice({
       });
   },
 });
+
+export const placeDataActions = placeData.actions;
+

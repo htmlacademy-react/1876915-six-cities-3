@@ -8,10 +8,11 @@ import { store } from './store';
 import browserHistory from './browser-history';
 import { checkAuthAction, fetchPreviewsAction } from './store/api-actions';
 import 'react-toastify/dist/ReactToastify.css';
+import './polyfills';
+import Spinner from './components/spinner/spinner';
 
-
-store.dispatch(fetchPreviewsAction());
 store.dispatch(checkAuthAction());
+store.dispatch(fetchPreviewsAction());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -20,10 +21,12 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <HistoryRouter history={browserHistory}>
-        <ToastContainer />
-        <App />
-      </HistoryRouter>
+      <Spinner>
+        <HistoryRouter history={browserHistory}>
+          <ToastContainer />
+          <App />
+        </HistoryRouter>
+      </Spinner>
     </Provider>
   </React.StrictMode >
 );

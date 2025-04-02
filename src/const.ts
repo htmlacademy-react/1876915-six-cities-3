@@ -44,9 +44,10 @@ export const CitiesDefaults = [
     longitude: 6.776314,
     zoom: 13,
   },
-];
+] as const;
 
-export const cityNames = CitiesDefaults.map((item) => item.name);
+export const DEFAULT_CITY = CitiesDefaults[0];
+export const CITY_NAMES = CitiesDefaults.map((item) => item.name);
 
 export const DefaultIcon = {
   iconUrl: DEFAULT_MARKER_URL,

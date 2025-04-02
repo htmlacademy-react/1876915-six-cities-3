@@ -1,5 +1,5 @@
 import { NameSpace } from '../../const';
-import { useAppSelector } from '../../hooks/use-app-selector';
-import { State } from '../../types/state';
+import { useAppSelector } from '../../hooks';
+import { State } from '../../types';
 
-export const useActiveCityTabSelector = () => useAppSelector((state: Pick<State, NameSpace.Place>) => state.PLACE.activeCity);
+export const useActiveMarkerSelector = () => useAppSelector((state: Pick<State, NameSpace.Place>) => state.PLACE.activeMarker);

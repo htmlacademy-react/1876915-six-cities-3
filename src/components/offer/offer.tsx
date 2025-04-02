@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { ImageDefault as D } from '../../const';
-import { Place } from '../../types/place';
+import { Place } from '../../types';
 import { capitalizeFirstLetter, pluralize } from '../../utils';
 import PlaceStatusLabel from '../place-card/place-status-label';
 import PlaceRating from '../place-card/place-rating';
