@@ -1,20 +1,29 @@
 import clsx from 'clsx';
-import { useLayoutConfig } from '../../hooks';
+import { useActionCreators, useLayoutConfig } from '../../hooks';
 import { Link, Outlet } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAuthStatusSelector } from '../../store/user-process/selectors';
 import { MouseEventHandler } from 'react';
+import { userProcessActions } from '../../store/user-process/user-process';
 
 export default function Layout() {
   const { pageClassName, shouldUserInfoRender, isLogoActive } = useLayoutConfig();
 
   const status = useAuthStatusSelector();
+  const { logoutAction } = useActionCreators(userProcessActions);
 
   const isAuthorized = (status === AuthorizationStatus.Auth);
 
   const logoClickHandler: MouseEventHandler<HTMLAnchorElement> = (evt) => {
     if (isLogoActive) {
       evt.preventDefault();
+    }
+  };
+
+  const logoutHandler: MouseEventHandler<HTMLAnchorElement> = (evt) => {
+    evt.preventDefault();
+    if (isAuthorized) {
+      logoutAction();
     }
   };
 
@@ -49,7 +58,7 @@ export default function Layout() {
                   </li>
                   {isAuthorized &&
                     <li className="header__nav-item">
-                      <Link className="header__nav-link" to={AppRoute.Login}>
+                      <Link className="header__nav-link" to={AppRoute.Login} onClick={logoutHandler}>
                         <span className="header__signout">Sign out</span>
                       </Link>
                     </li>}

@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { Link, useSearchParams } from 'react-router-dom';
 import { ReactEventHandler, useEffect } from 'react';
 import { CITY_NAMES, DEFAULT_CITY } from '../../const';
-import { useActionCreator } from '../../hooks';
+import { useActionCreators } from '../../hooks';
 import { placeProcessActions } from '../../store/place-process/place-process';
 import { PlacePreview } from '../../types';
 import { getCityLocation } from '../../utils/marker';
@@ -12,7 +12,7 @@ type CityTabsProps = {
 };
 
 export default function CityTabs({ previews }: CityTabsProps) {
-  const { setActiveMarker } = useActionCreator(placeProcessActions);
+  const { setActiveMarker } = useActionCreators(placeProcessActions);
   const [searchParams, setSearchParams] = useSearchParams();
   const activeCityName = searchParams.get('city');
 

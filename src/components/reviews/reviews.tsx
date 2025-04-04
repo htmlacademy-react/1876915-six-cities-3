@@ -1,22 +1,27 @@
+import { useMemo } from 'react';
 import { AuthorizationStatus } from '../../const';
-import { getReviews } from '../../mocks/reviews';
 import { useAuthStatusSelector } from '../../store/user-process/selectors';
+import { PlaceComment } from '../../types';
 import { getCommentDate } from '../../utils/comment';
 import PlaceRating from '../place-card/place-rating';
 import ReviewForm from './review-form';
 
-export default function Reviews() {
+type ReviewsProps = {
+  reviews: PlaceComment[];
+};
 
-  const reviews = getReviews();
+export default function Reviews({ reviews }: ReviewsProps) {
+
   const status = useAuthStatusSelector();
   const isAuthorized = (status === AuthorizationStatus.Auth);
+  const sortedReviews = useMemo(() => reviews.toSorted((first, second) => new Date(first.date).getDate() - new Date(second.date).getDate()), [reviews]);
 
   return (
     <section className="offer__reviews reviews">
       <h2 className="reviews__title">
-        Reviews · <span className="reviews__amount">{reviews.length}</span>
+        Reviews · <span className="reviews__amount">{sortedReviews.length}</span>
       </h2>
-      {reviews.map((review) => {
+      {sortedReviews.map((review) => {
         const [date, fullDate] = getCommentDate(review.date);
 
         return (

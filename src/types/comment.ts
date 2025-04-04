@@ -1,6 +1,6 @@
 import { User } from './user';
 
-export type Comment = {
+export type PlaceComment = {
   id: string;
   date: string;
   user: User;

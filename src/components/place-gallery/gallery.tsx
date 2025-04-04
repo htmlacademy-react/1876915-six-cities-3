@@ -2,7 +2,7 @@ type GalleryProps = {
   imageUrls: string[];
 }
 
-export default function Gallery({ imageUrls }: GalleryProps) {
+export default function PlaceGallery({ imageUrls }: GalleryProps) {
   return (
     <div className="offer__gallery">
       {imageUrls.map((url, index) => (
