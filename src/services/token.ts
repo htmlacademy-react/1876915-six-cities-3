@@ -1,17 +1,21 @@
+import { LoggedUser } from '../types';
 
-const USER_TOKEN_KEY_NAME = 'user-token';
+const USER_DATA_KEY_NAME = '6-cities-user-data';
 
 export type Token = string;
 
 export const getToken = (): Token => {
-  const token = localStorage.getItem(USER_TOKEN_KEY_NAME);
-  return token ?? '';
+  const data: LoggedUser = JSON.parse(localStorage.getItem(USER_DATA_KEY_NAME) ?? 'null') as LoggedUser;
+
+  return data?.token ?? '';
 };
 
-export const saveToken = (token: Token): void => {
-  localStorage.setItem(USER_TOKEN_KEY_NAME, token);
+export const getUserData = (): LoggedUser => JSON.parse(localStorage.getItem(USER_DATA_KEY_NAME) ?? 'null') as LoggedUser;
+
+export const saveUserData = (userData: LoggedUser): void => {
+  localStorage.setItem(USER_DATA_KEY_NAME, JSON.stringify(userData));
 };
 
-export const dropToken = (): void => {
-  localStorage.removeItem(USER_TOKEN_KEY_NAME);
+export const dropUserData = (): void => {
+  localStorage.removeItem(USER_DATA_KEY_NAME);
 };

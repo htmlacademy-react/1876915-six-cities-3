@@ -1,20 +1,29 @@
 import clsx from 'clsx';
-import { useLayoutConfig } from '../../hooks';
+import { useActionCreators, useLayoutConfig } from '../../hooks';
 import { Link, Outlet } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../../const';
-import { useAuthStatusSelector } from '../../store/user-process/selectors';
+import { AppRoute } from '../../const';
 import { MouseEventHandler } from 'react';
+import { userProcessActions } from '../../store/user-process/user-process';
+import { getUserData } from '../../services/token';
+import { useFavoritesSelector } from '../../store/place-data/selectors';
 
 export default function Layout() {
   const { pageClassName, shouldUserInfoRender, isLogoActive } = useLayoutConfig();
+  const { logoutAction } = useActionCreators(userProcessActions);
 
-  const status = useAuthStatusSelector();
-
-  const isAuthorized = (status === AuthorizationStatus.Auth);
+  const favorites = useFavoritesSelector();
+  const user = getUserData();
 
   const logoClickHandler: MouseEventHandler<HTMLAnchorElement> = (evt) => {
     if (isLogoActive) {
       evt.preventDefault();
+    }
+  };
+
+  const logoutHandler: MouseEventHandler<HTMLAnchorElement> = (evt) => {
+    evt.preventDefault();
+    if (user) {
+      logoutAction();
     }
   };
 
@@ -39,17 +48,19 @@ export default function Layout() {
                 <ul className="header__nav-list">
                   <li className="header__nav-item user">
                     <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>
-                      <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-                      {isAuthorized ?
+                      <div className="header__avatar-wrapper user__avatar-wrapper">
+                        {user && <img src={user.avatarUrl}></img>}
+                      </div>
+                      {user ?
                         <>
-                          <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                          <span className="header__favorite-count">3</span>
+                          <span className="header__user-name user__name">{user.email}</span>
+                          <span className="header__favorite-count">{favorites.length}</span>
                         </> : <span className="header__login">Sign in</span>}
                     </Link>
                   </li>
-                  {isAuthorized &&
+                  {user &&
                     <li className="header__nav-item">
-                      <Link className="header__nav-link" to={AppRoute.Login}>
+                      <Link className="header__nav-link" to={AppRoute.Login} onClick={logoutHandler}>
                         <span className="header__signout">Sign out</span>
                       </Link>
                     </li>}

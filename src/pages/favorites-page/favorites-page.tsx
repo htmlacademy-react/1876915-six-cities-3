@@ -4,31 +4,24 @@ import FavoritesListEmpty from '../../components/favorites-list/favorites-list-e
 import FavoritesList from '../../components/favorites-list/favorites-list';
 import { useEffect } from 'react';
 import clsx from 'clsx';
-import { useFavoritePreviewsSelector } from '../../store/place-data/selectors';
-import { useAppDispatch } from '../../hooks';
-import { fetchFavoritePreviewsAction } from '../../store/api-actions';
+import { useFavoritesSelector } from '../../store/place-data/selectors';
 
 export default function FavoritesPage() {
 
-  const dispatch = useAppDispatch();
-  const previews = useFavoritePreviewsSelector();
-
-  if (!previews.length) {
-    dispatch(fetchFavoritePreviewsAction());
-  }
+  const favorites = useFavoritesSelector();
 
   useEffect(() => {
-    document.querySelector('.page')?.classList.toggle('page--favorites-empty', previews.length === 0);
-  }, [previews.length]);
+    document.querySelector('.page')?.classList.toggle('page--favorites-empty', favorites.length === 0);
+  }, [favorites.length]);
 
   return (
     < >
-      <main className={clsx('page__main page__main--favorites', previews.length || 'page__main--favorites-empty')}>
+      <main className={clsx('page__main page__main--favorites', favorites.length || 'page__main--favorites-empty')}>
         <Helmet>
           <title>6 Cities.Favorite places</title>
         </Helmet>
         <div className="page__favorites-container container">
-          {previews.length ? <FavoritesList previews={previews} /> : <FavoritesListEmpty />}
+          {favorites.length ? <FavoritesList previews={favorites} /> : <FavoritesListEmpty />}
         </div>
       </main>
       <Footer />
