@@ -19,10 +19,12 @@ export type PlaceData = {
   previewsFetchStatus: RequestStatus;
   placeFetchStatus: RequestStatus;
   nearbyFetchStatus: RequestStatus;
+  favoritesFetchStatus: RequestStatus;
   commentsFetchStatus: RequestStatus;
-  previews: PlacePreview[] | [];
-  favorites: PlacePreview[] | [];
-  comments: PlaceComment[] | [];
+  commentsCreateStatus: RequestStatus;
+  previews: PlacePreview[];
+  favorites: PlacePreview[];
+  comments: PlaceComment[];
   place: Place | null;
   nearbyPreviews: PlacePreview[] | [];
 }

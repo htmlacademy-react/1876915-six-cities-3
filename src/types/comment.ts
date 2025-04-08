@@ -7,3 +7,8 @@ export type PlaceComment = {
   comment: string;
   rating: number;
 }
+
+export type CreatePlaceComment = {
+  comment: string;
+  rating: number;
+}

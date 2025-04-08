@@ -61,7 +61,7 @@ export default function PlacePage() {
 
   return (
     <main className="page__main page__main--offer">
-      <Helmet><title>6 Cities.Offer</title></Helmet>
+      <Helmet><title>6 Cities.{place ? place.title : ''}</title></Helmet>
 
       {shouldPlaceShown ?
         <section className="offer">
@@ -79,7 +79,7 @@ export default function PlacePage() {
               <PlaceRating placeRating={place.rating} className={{ rating: 'offer__rating', stars: 'offer__stars', value: 'offer__rating-value' }} shouldRatingShown />
               <PlaceFeatures place={place} />
 
-              {shouldCommentsShown ? <Reviews reviews={comments} /> : <Spinner />}
+              {shouldCommentsShown ? <Reviews reviews={comments} placeId={id} /> : <Spinner />}
             </div>
           </div>
           <Map markers={markers} className='offer__map' />

@@ -1,6 +1,6 @@
 import { HelmetProvider } from 'react-helmet-async';
 import { Route, Routes } from 'react-router-dom';
-import { AppRoute } from '../../const';
+import { AppRoute, AuthorizationStatus } from '../../const';
 import MainPage from '../../pages/main-page/main-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import LoginPage from '../../pages/login-page/login-page';
@@ -10,15 +10,41 @@ import PrivateRoute from '../private-route/private-route';
 import Layout from '../layout/layout';
 import NotFoundPageRedirect from '../../pages/not-found-page/not-found-page-redirect';
 import ScrollToTop from '../scroll-top/scroll-top';
-import { RequestStatus } from '../../types';
-import { usePreviewsFetchStatusSelector } from '../../store/place-data/selectors';
 import Spinner from '../spinner/spinner';
+import { RequestStatus } from '../../types';
+import { useFavoritesFetchStatusSelector, usePreviewsFetchStatusSelector } from '../../store/place-data/selectors';
+import { useActionCreators } from '../../hooks';
+import { placeDataActions } from '../../store/place-data/place-data';
+import { useEffect } from 'react';
+import { userProcessActions } from '../../store/user-process/user-process';
+import { useAuthStatusSelector } from '../../store/user-process/selectors';
 
 export default function App() {
 
-  const status = usePreviewsFetchStatusSelector();
+  const { fetchPreviewsAction, fetchFavoritesAction } = useActionCreators(placeDataActions);
+  const { checkAuthAction } = useActionCreators(userProcessActions);
 
-  if (status === RequestStatus.Pending) {
+  const authStatus = useAuthStatusSelector();
+  const isAuthorized = (authStatus === AuthorizationStatus.Auth);
+
+  useEffect(() => {
+    if (isAuthorized) {
+      fetchFavoritesAction();
+    }
+  }, [fetchFavoritesAction, isAuthorized]);
+
+  useEffect(() => {
+    fetchPreviewsAction();
+  }, [fetchPreviewsAction]);
+
+  useEffect(() => {
+    checkAuthAction();
+  }, [checkAuthAction]);
+
+  const previewStatus = usePreviewsFetchStatusSelector();
+  const favoritesStatus = useFavoritesFetchStatusSelector();
+
+  if ((previewStatus === RequestStatus.Pending) && (favoritesStatus === RequestStatus.Pending)) {
     return <Spinner />;
   }
 

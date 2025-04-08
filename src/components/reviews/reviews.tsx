@@ -7,10 +7,11 @@ import PlaceRating from '../place-card/place-rating';
 import ReviewForm from './review-form';
 
 type ReviewsProps = {
+  placeId: string;
   reviews: PlaceComment[];
 };
 
-export default function Reviews({ reviews }: ReviewsProps) {
+export default function Reviews({ reviews, placeId }: ReviewsProps) {
 
   const status = useAuthStatusSelector();
   const isAuthorized = (status === AuthorizationStatus.Auth);
@@ -48,7 +49,7 @@ export default function Reviews({ reviews }: ReviewsProps) {
           </ul>
         );
       })}
-      {isAuthorized && <ReviewForm />}
+      {isAuthorized && <ReviewForm placeId={placeId} />}
     </section>
   );
 }

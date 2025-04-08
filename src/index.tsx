@@ -6,9 +6,9 @@ import { ToastContainer } from 'react-toastify';
 import { Provider } from 'react-redux';
 import { store } from './store';
 import browserHistory from './browser-history';
-import { checkAuthAction, fetchPreviewsAction } from './store/api-actions';
 import 'react-toastify/dist/ReactToastify.css';
 import './polyfills';
+import { checkAuthAction, fetchPreviewsAction } from './store/api-actions';
 
 store.dispatch(fetchPreviewsAction());
 store.dispatch(checkAuthAction());

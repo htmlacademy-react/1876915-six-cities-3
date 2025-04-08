@@ -1,58 +1,55 @@
-import { Fragment, ReactEventHandler, useState } from 'react';
-import { MIN_REVIEW_LENGTH } from '../../const';
+import { USER_COMMENT_MAX_LENGTH, USER_COMMENT_MIN_LENGTH, USER_COMMENT_MIN_RATING } from '../../const';
+import ReviewStars from './review-stars';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { useActionCreators } from '../../hooks';
+import { placeDataActions } from '../../store/place-data/place-data';
+import { useCommentCreateStatusSelector } from '../../store/place-data/selectors';
+import { RequestStatus } from '../../types';
+import { useEffect } from 'react';
 
-const ratingGrades = ['perfect', 'good', 'not bad', 'badly', 'terribly'] as const;
+export type Inputs = {
+  comment: string;
+  rating: number;
+}
 
-export default function ReviewForm() {
+type ReviewFormProps = {
+  placeId: string;
+}
 
-  const [review, setRatingState] = useState({ rating: 0, review: '' });
+export default function ReviewForm({ placeId }: ReviewFormProps) {
 
-  const onChangeHandler: ReactEventHandler<HTMLInputElement | HTMLTextAreaElement> = ({ currentTarget: { name, value } }) => {
-    setRatingState({ ...review, [name]: value });
-  };
+  const { register, handleSubmit, formState: { isValid }, reset, watch } = useForm<Inputs>({ defaultValues: { comment: '', rating: 0 } });
+  const { createCommentAction } = useActionCreators(placeDataActions);
+  const status = useCommentCreateStatusSelector();
+  const isSubmitting = (status === RequestStatus.Pending);
 
-  const onFormSubmit: ReactEventHandler<HTMLFormElement> = (evt) => {
-    evt.preventDefault();
+  useEffect(() => {
+    if (status === RequestStatus.Fulfilled) {
+      reset();
+    }
+  }, [reset, status]);
+
+  const onFormSubmit: SubmitHandler<Inputs> = ({ comment, rating }) => {
+    createCommentAction({ comment, rating: +rating, placeId });
   };
 
   return (
-    <form className="reviews__form form" action="#" method="post" onSubmit={onFormSubmit}>
+    <form className="reviews__form form" action="#" method="post" onSubmit={(evt) => void handleSubmit(onFormSubmit)(evt)}>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
-        {
-          ratingGrades.map((grade, gradeIndex) => {
-            const index = ratingGrades.length - gradeIndex;
-            return (
-              <Fragment key={grade}>
-                <input
-                  className="form__rating-input visually-hidden"
-                  name="rating"
-                  defaultValue={index}
-                  id={`${index}-stars`}
-                  type="radio"
-                  onClick={onChangeHandler}
-                />
-                <label
-                  htmlFor={`${index}-stars`}
-                  className="reviews__rating-label form__rating-label"
-                  title={grade}
-                >
-                  <svg className="form__star-image" width={37} height={33}>
-                    <use xlinkHref="#icon-star" />
-                  </svg>
-                </label>
-              </Fragment>
-            );
-          })
-        }
+        <ReviewStars register={register} />
       </div>
       <textarea
         className="reviews__textarea form__textarea"
         id="review"
-        name="review"
+        {...register('comment', {
+          required: true,
+          minLength: USER_COMMENT_MIN_LENGTH,
+          maxLength: USER_COMMENT_MAX_LENGTH,
+        })}
         placeholder="Tell how was your stay, what you like and what can be improved"
         defaultValue={''}
-        onChange={onChangeHandler}
+        disabled={isSubmitting}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
@@ -64,12 +61,12 @@ export default function ReviewForm() {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={!review.rating || (review.review.length < MIN_REVIEW_LENGTH)}
+          disabled={!isValid || isSubmitting || (watch('rating') < USER_COMMENT_MIN_RATING)}
         >
-          Submit
+          {isSubmitting ? '...Submitting' : 'Submit'}
         </button>
       </div>
-    </form>
+    </form >
   );
 }
 

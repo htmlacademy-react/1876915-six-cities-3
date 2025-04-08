@@ -1,12 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
-import { ApiRoute, AppRoute } from '../const';
-import { Place, PlaceComment, PlacePreview } from '../types';
+import { ApiRoute, AppRoute, AuthorizationStatus } from '../const';
+import { CreatePlaceComment, Place, PlaceComment, PlacePreview } from '../types';
 import { AppDispatch, State } from '../types';
 import { LoggedUser } from '../types';
 import { AuthData } from '../types';
-import { dropToken, saveToken } from '../services/token';
+import { dropUserData, saveUserData } from '../services/token';
 import { redirectToRoute } from './action';
+import { userProcessActions } from './user-process/user-process';
 
 type ThunkConfig = {
   dispatch: AppDispatch;
@@ -22,7 +23,7 @@ export const fetchPreviewsAction = createAsyncThunk<PlacePreview[], undefined, T
   },
 );
 
-export const fetchFavoritePreviewsAction = createAsyncThunk<PlacePreview[], undefined, ThunkConfig>(
+export const fetchFavoritesAction = createAsyncThunk<PlacePreview[], undefined, ThunkConfig>(
   'data/fetchFavoritePreviews',
   async (_arg, { extra: api }) => {
     const { data } = await api.get<PlacePreview[]>(ApiRoute.Favorites);
@@ -54,6 +55,14 @@ export const fetchPlaceCommentsAction = createAsyncThunk<PlaceComment[], string,
   },
 );
 
+export const createCommentAction = createAsyncThunk<PlaceComment, CreatePlaceComment & { placeId: string }, ThunkConfig>(
+  'data/createComment',
+  async ({ comment, rating, placeId }, { extra: api }) => {
+    const { data } = await api.post<PlaceComment>(`${ApiRoute.Comments}/${placeId}`, { comment, rating });
+    return data;
+  },
+);
+
 export const checkAuthAction = createAsyncThunk<void, undefined, ThunkConfig>(
   'user/checkAuth',
   async (_arg, { extra: api }) => {
@@ -61,20 +70,25 @@ export const checkAuthAction = createAsyncThunk<void, undefined, ThunkConfig>(
   },
 );
 
-export const loginAction = createAsyncThunk<void, AuthData, ThunkConfig>(
+export const loginAction = createAsyncThunk<LoggedUser, AuthData, ThunkConfig>(
   'user/login',
   async ({ email, password }, { dispatch, extra: api }) => {
-    const { data: { token } } = await api.post<LoggedUser>(ApiRoute.Login, { email, password });
-    saveToken(token);
+    const { data } = await api.post<LoggedUser>(ApiRoute.Login, { email, password });
+    saveUserData(data);
     dispatch(redirectToRoute(AppRoute.Main));
+    return data;
   },
 );
 
 export const logoutAction = createAsyncThunk<void, undefined, ThunkConfig>(
   'user/logout',
-  async (_arg, { extra: api }) => {
-    await api.delete(ApiRoute.Logout);
-    dropToken();
+  async (_arg, { dispatch, extra: api }) => {
+    try {
+      await api.delete(ApiRoute.Logout);
+    } finally {
+      dispatch(userProcessActions.setAuthorizationStatus(AuthorizationStatus.NoAuth));
+      dropUserData();
+    }
   },
 );
 

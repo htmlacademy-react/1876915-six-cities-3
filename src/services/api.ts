@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import { store } from '../store';
-import { getToken } from './token';
+import { dropUserData, getToken } from './token';
 import { userProcessActions } from '../store/user-process/user-process';
 import { AuthorizationStatus } from '../const';
 import { StatusCodes } from 'http-status-codes';
@@ -40,6 +40,7 @@ const onResponseError = (error: AxiosError<AxiosResponseDataType>): Promise<Axio
   if (response) {
     if (response.status === +StatusCodes.UNAUTHORIZED) {
       store.dispatch(userProcessActions.setAuthorizationStatus(AuthorizationStatus.NoAuth));
+      dropUserData();
     }
 
     if (shouldDisplayError(response.status)) {
