@@ -5,7 +5,7 @@ import { SortType } from '../../const';
 import PlaceCard from '../place-card';
 import PlaceSort from '../place-sort/place-sort';
 import { useActionCreators } from '../../hooks';
-import { placeProcessActions } from '../../store/place-process/place-process';
+import { placeProcessActions } from '../../store/place-process/place-process.slice';
 
 type PlaceListProps = {
   previews: PlacePreview[];

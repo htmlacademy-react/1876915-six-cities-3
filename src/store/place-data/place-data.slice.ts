@@ -1,15 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { NameSpace } from '../../const';
-import { PlaceData, RequestStatus } from '../../types';
-import { createCommentAction, fetchFavoritesAction, fetchNearbyPreviewsAction, fetchPlaceAction, fetchPlaceCommentsAction, fetchPreviewsAction } from '../api-actions';
+import { SliceNameSpace } from '../../const';
+import { PlaceDataProcess, RequestStatus } from '../../types';
+import { changeFavoriteStatusAction, createCommentAction, fetchFavoritesAction, fetchNearbyPreviewsAction, fetchPlaceAction, fetchPlaceCommentsAction, fetchPreviewsAction } from '../../services/api-actions';
 
-const initialState: PlaceData = {
+const initialState: PlaceDataProcess = {
   previewsFetchStatus: RequestStatus.Pending,
   placeFetchStatus: RequestStatus.Fulfilled,
   nearbyFetchStatus: RequestStatus.Fulfilled,
   favoritesFetchStatus: RequestStatus.Fulfilled,
   commentsFetchStatus: RequestStatus.Fulfilled,
   commentsCreateStatus: RequestStatus.Fulfilled,
+  changeFavoriteStatus: RequestStatus.Fulfilled,
   previews: [],
   favorites: [],
   comments: [],
@@ -18,7 +19,7 @@ const initialState: PlaceData = {
 };
 
 export const placeData = createSlice({
-  name: NameSpace.Data,
+  name: SliceNameSpace.Data,
   initialState,
   reducers: {},
   extraReducers(builder) {
@@ -43,6 +44,25 @@ export const placeData = createSlice({
       .addCase(fetchFavoritesAction.rejected, (state) => {
         state.favoritesFetchStatus = RequestStatus.Rejected;
       })
+      .addCase(changeFavoriteStatusAction.fulfilled, (state, { payload }) => {
+        state.changeFavoriteStatus = RequestStatus.Fulfilled;
+
+        if (!payload.isFavorite) {
+          state.favorites = state.favorites.filter((item) => item.id !== payload.id);
+          return;
+        }
+
+        const place = state.favorites.find((item) => item.id === payload.id);
+        if (!place) {
+          state.favorites = state.favorites.concat(payload);
+        }
+      })
+      .addCase(changeFavoriteStatusAction.pending, (state) => {
+        state.changeFavoriteStatus = RequestStatus.Pending;
+      })
+      .addCase(changeFavoriteStatusAction.rejected, (state) => {
+        state.changeFavoriteStatus = RequestStatus.Rejected;
+      })
       .addCase(fetchPlaceAction.fulfilled, (state, { payload }) => {
         state.place = payload;
         state.placeFetchStatus = RequestStatus.Fulfilled;
@@ -55,9 +75,16 @@ export const placeData = createSlice({
       })
       .addCase(fetchPlaceCommentsAction.fulfilled, (state, { payload }) => {
         state.comments = payload;
+        state.commentsFetchStatus = RequestStatus.Fulfilled;
+      })
+      .addCase(fetchPlaceCommentsAction.pending, (state) => {
+        state.commentsFetchStatus = RequestStatus.Pending;
+      })
+      .addCase(fetchPlaceCommentsAction.rejected, (state) => {
+        state.commentsFetchStatus = RequestStatus.Rejected;
       })
       .addCase(createCommentAction.fulfilled, (state, { payload }) => {
-        state.comments = state.comments.concat(payload);
+        state.comments.push(payload);
         state.commentsCreateStatus = RequestStatus.Fulfilled;
       })
       .addCase(createCommentAction.pending, (state) => {
@@ -80,5 +107,7 @@ export const placeDataActions = {
   fetchNearbyPreviewsAction,
   fetchPlaceCommentsAction,
   createCommentAction,
+  changeFavoriteStatusAction,
 };
 
+export const placeDataReducer = placeData.reducer;

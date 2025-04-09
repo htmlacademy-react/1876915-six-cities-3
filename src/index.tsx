@@ -8,10 +8,6 @@ import { store } from './store';
 import browserHistory from './browser-history';
 import 'react-toastify/dist/ReactToastify.css';
 import './polyfills';
-import { checkAuthAction, fetchPreviewsAction } from './store/api-actions';
-
-store.dispatch(fetchPreviewsAction());
-store.dispatch(checkAuthAction());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

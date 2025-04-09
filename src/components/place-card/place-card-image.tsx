@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import cn from 'classnames';
 import { AppRoute, ImageDefault as D } from '../../const';
 import { Link } from 'react-router-dom';
 
@@ -12,7 +12,7 @@ type PlaceCardImageProps = {
 
 export default function PlaceCardImage({ id, url, className, width = D.DefaultWidth, height = D.DefaultHeight }: PlaceCardImageProps) {
   return (
-    <div className={clsx('place-card__image-wrapper', className)}>
+    <div className={cn('place-card__image-wrapper', className)}>
       <Link to={`${AppRoute.Offer}/${id}`}>
         <img
           className="place-card__image"

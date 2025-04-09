@@ -1,7 +1,7 @@
 import { Middleware } from 'redux';
-import { rootReducer } from '../root-reducer';
 import { PayloadAction } from '@reduxjs/toolkit';
 import browserHistory from '../../browser-history';
+import { rootReducer } from '../index';
 
 type Reducer = ReturnType<typeof rootReducer>;
 

@@ -2,10 +2,9 @@ import { USER_COMMENT_MAX_LENGTH, USER_COMMENT_MIN_LENGTH, USER_COMMENT_MIN_RATI
 import ReviewStars from './review-stars';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useActionCreators } from '../../hooks';
-import { placeDataActions } from '../../store/place-data/place-data';
-import { useCommentCreateStatusSelector } from '../../store/place-data/selectors';
 import { RequestStatus } from '../../types';
 import { useEffect } from 'react';
+import { placeDataActions, useCommentCreateStatusSelector } from '../../store';
 
 export type Inputs = {
   comment: string;

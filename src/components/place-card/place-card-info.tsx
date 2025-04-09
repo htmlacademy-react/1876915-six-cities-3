@@ -10,7 +10,7 @@ type PlaceCardInfoProps = {
 }
 
 export default function PlaceCardInfo({ preview }: PlaceCardInfoProps) {
-  const { id, title, price, rating, type, isFavorite } = preview;
+  const { id, title, price, rating, type } = preview;
 
   return (
     <div className="place-card__info">
@@ -19,7 +19,7 @@ export default function PlaceCardInfo({ preview }: PlaceCardInfoProps) {
           <b className="place-card__price-value">€{price}</b>
           <span className="place-card__price-text">&nbsp;/&nbsp;night</span>
         </div>
-        <PlaceToFavoritesButton className='place-card' isFavorite={isFavorite} />
+        <PlaceToFavoritesButton className='place-card' placeId={id} />
       </div>
       <PlaceRating placeRating={rating} className={{ rating: 'place-card__rating', stars: 'place-card__stars' }} />
       <h2 className="place-card__name">

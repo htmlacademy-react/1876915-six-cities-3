@@ -45,4 +45,7 @@ export type Place = Omit<PlacePreview, 'previewImage'> & {
   maxAdults: number;
 }
 
+export type ChangeFavoritesResponse = Place & { previewImage: string };
+
 export type PlaceSortType = keyof typeof SortType;
+

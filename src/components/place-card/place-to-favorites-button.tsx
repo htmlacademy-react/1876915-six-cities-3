@@ -1,20 +1,45 @@
-import clsx from 'clsx';
-import { ImageDefault as D } from '../../const';
+import cn from 'classnames';
+import { AppRoute, AuthorizationStatus, ImageDefault as D } from '../../const';
+import { MouseEventHandler } from 'react';
+import { placeDataActions, useAuthStatusSelector, useChangeFavoritesStatusSelector, useIsFavoriteSelector } from '../../store';
+import { useActionCreators } from '../../hooks';
+import { RequestStatus } from '../../types';
+import { useNavigate } from 'react-router-dom';
 
 type PlaceToFavoritesButtonProps = {
+  placeId: string;
   className: string;
-  isFavorite: boolean | undefined;
   width?: number;
   height?: number;
-  onClick?: () => unknown;
 }
 
-export default function PlaceToFavoritesButton({ className, isFavorite, onClick, width = D.CardBookmarkIconWidth, height = D.CardBookmarkIconHeight }: PlaceToFavoritesButtonProps) {
+export default function PlaceToFavoritesButton({ className, placeId, width = D.CardBookmarkIconWidth, height = D.CardBookmarkIconHeight }: PlaceToFavoritesButtonProps) {
+
+  const navigate = useNavigate();
+
+  const authStatus = useAuthStatusSelector();
+  const status = useChangeFavoritesStatusSelector();
+  const isFavorite = useIsFavoriteSelector(placeId);
+
+  const { changeFavoriteStatusAction } = useActionCreators(placeDataActions);
+  const isButtonDisabled = (status === RequestStatus.Pending);
+
+  const clickHandler: MouseEventHandler<HTMLButtonElement> = () => {
+    if (authStatus !== AuthorizationStatus.Auth) {
+      navigate(AppRoute.Login);
+      return;
+    }
+
+    changeFavoriteStatusAction({ status: !isFavorite, placeId });
+  };
+
   return (
     <button
-      className={clsx('button', `${className}__bookmark-button`, isFavorite && `${className}__bookmark-button--active`)}
+      key={placeId}
+      className={cn('button', `${className}__bookmark-button`, isFavorite && `${className}__bookmark-button--active`)}
       type="button"
-      onClick={onClick}
+      onClick={clickHandler}
+      disabled={isButtonDisabled}
     >
       <svg
         className={`${className}__bookmark-icon`}

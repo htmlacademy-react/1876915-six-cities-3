@@ -12,12 +12,9 @@ import NotFoundPageRedirect from '../../pages/not-found-page/not-found-page-redi
 import ScrollToTop from '../scroll-top/scroll-top';
 import Spinner from '../spinner/spinner';
 import { RequestStatus } from '../../types';
-import { useFavoritesFetchStatusSelector, usePreviewsFetchStatusSelector } from '../../store/place-data/selectors';
+import { placeDataActions, useAuthStatusSelector, useFavoritesFetchStatusSelector, usePreviewsFetchStatusSelector, userProcessActions } from '../../store';
 import { useActionCreators } from '../../hooks';
-import { placeDataActions } from '../../store/place-data/place-data';
 import { useEffect } from 'react';
-import { userProcessActions } from '../../store/user-process/user-process';
-import { useAuthStatusSelector } from '../../store/user-process/selectors';
 
 export default function App() {
 
@@ -44,7 +41,7 @@ export default function App() {
   const previewStatus = usePreviewsFetchStatusSelector();
   const favoritesStatus = useFavoritesFetchStatusSelector();
 
-  if ((previewStatus === RequestStatus.Pending) && (favoritesStatus === RequestStatus.Pending)) {
+  if ((previewStatus === RequestStatus.Pending) || (favoritesStatus === RequestStatus.Pending)) {
     return <Spinner />;
   }
 

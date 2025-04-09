@@ -1,10 +1,10 @@
-import clsx from 'clsx';
+import cn from 'classnames';
 import { useEffect, useRef } from 'react';
 import { MarkerType } from '../../types';
 import { BaseIconOptions, Icon, LayerGroup, layerGroup, Marker } from 'leaflet';
 import { ActiveIcon, DefaultIcon } from '../../const';
 import { useMap } from '../../hooks';
-import { useActiveMarkerSelector } from '../../store/place-process/selectors';
+import { useActiveMarkerSelector } from '../../store/place-process/place-process.selectors';
 
 const defaultIcon = new Icon(DefaultIcon as BaseIconOptions);
 const activeIcon = new Icon(ActiveIcon as BaseIconOptions);
@@ -40,6 +40,6 @@ export default function Map({ markers, className }: MapProps) {
   }, [map, markers, center.id]);
 
   return (
-    <section ref={mapRef} className={clsx('map', className)} />
+    <section ref={mapRef} className={cn('map', className)} />
   );
 }

@@ -1,6 +1,6 @@
 import CityTabs from '../../components/city-tabs/city-tabs';
 import Cities from '../../components/cities/cities';
-import { usePreviewsSelector } from '../../store/place-data/selectors';
+import { usePreviewsSelector } from '../../store';
 import { Helmet } from 'react-helmet-async';
 
 export default function MainPage() {

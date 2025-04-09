@@ -15,13 +15,14 @@ export type PlaceProcess = {
   activeMarker: MarkerType;
 }
 
-export type PlaceData = {
+export type PlaceDataProcess = {
   previewsFetchStatus: RequestStatus;
   placeFetchStatus: RequestStatus;
   nearbyFetchStatus: RequestStatus;
   favoritesFetchStatus: RequestStatus;
   commentsFetchStatus: RequestStatus;
   commentsCreateStatus: RequestStatus;
+  changeFavoriteStatus: RequestStatus;
   previews: PlacePreview[];
   favorites: PlacePreview[];
   comments: PlaceComment[];

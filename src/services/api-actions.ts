@@ -1,13 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { ApiRoute, AppRoute, AuthorizationStatus } from '../const';
-import { CreatePlaceComment, Place, PlaceComment, PlacePreview } from '../types';
+import { ChangeFavoritesResponse, CreatePlaceComment, Place, PlaceComment, PlacePreview } from '../types';
 import { AppDispatch, State } from '../types';
 import { LoggedUser } from '../types';
 import { AuthData } from '../types';
-import { dropUserData, saveUserData } from '../services/token';
-import { redirectToRoute } from './action';
-import { userProcessActions } from './user-process/user-process';
+import { dropUserData, saveUserData } from './token';
+import { redirectAction, userProcessActions } from '../store';
 
 type ThunkConfig = {
   dispatch: AppDispatch;
@@ -27,6 +26,14 @@ export const fetchFavoritesAction = createAsyncThunk<PlacePreview[], undefined, 
   'data/fetchFavoritePreviews',
   async (_arg, { extra: api }) => {
     const { data } = await api.get<PlacePreview[]>(ApiRoute.Favorites);
+    return data;
+  },
+);
+
+export const changeFavoriteStatusAction = createAsyncThunk<ChangeFavoritesResponse, { status: boolean; placeId: string }, ThunkConfig>(
+  'data/changeFavoriteStatus',
+  async ({ status, placeId }, { extra: api }) => {
+    const { data } = await api.post<ChangeFavoritesResponse>(`${ApiRoute.Favorites}/${placeId}/${Number(status)}`);
     return data;
   },
 );
@@ -75,7 +82,7 @@ export const loginAction = createAsyncThunk<LoggedUser, AuthData, ThunkConfig>(
   async ({ email, password }, { dispatch, extra: api }) => {
     const { data } = await api.post<LoggedUser>(ApiRoute.Login, { email, password });
     saveUserData(data);
-    dispatch(redirectToRoute(AppRoute.Main));
+    dispatch(redirectAction(AppRoute.Main));
     return data;
   },
 );
