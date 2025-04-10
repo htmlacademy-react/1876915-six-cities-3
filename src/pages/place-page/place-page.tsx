@@ -1,12 +1,10 @@
 import { Helmet } from 'react-helmet-async';
 import { Navigate, useParams } from 'react-router-dom';
 import { AppRoute, DEFAULT_CITY, MAX_SHOWN_NEAR_PLACES, ImageDefault as D } from '../../const';
-import { useCommentsFetchStatusSelector, useCommentsSelector, useNearbyFetchStatusSelector, useNearbySelector, usePlaceFetchStatusSelector, usePlaceSelector } from '../../store/place-data/selectors';
+import { placeDataActions, placeProcessActions, useCommentsFetchStatusSelector, useCommentsSelector, useNearbyFetchStatusSelector, useNearbySelector, usePlaceFetchStatusSelector, usePlaceSelector } from '../../store';
 import { useEffect } from 'react';
 import { MarkerType, Place, RequestStatus } from '../../types';
 import { useActionCreators } from '../../hooks';
-import { placeProcessActions } from '../../store/place-process/place-process';
-import { placeDataActions } from '../../store/place-data/place-data';
 import Map from '../../components/map/map';
 import PlaceCard from '../../components/place-card';
 import Spinner from '../../components/spinner/spinner';
@@ -73,7 +71,7 @@ export default function PlacePage() {
               <PlaceStatusLabel className='offer__mark' />
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">{place.title}</h1>Place
-                <PlaceToFavoritesButton className='offer' isFavorite={place.isFavorite} width={D.OfferBookmarkIconWidth} height={D.OfferBookmarkIconHeight} />
+                <PlaceToFavoritesButton className='offer' placeId={id} width={D.OfferBookmarkIconWidth} height={D.OfferBookmarkIconHeight} />
               </div>
 
               <PlaceRating placeRating={place.rating} className={{ rating: 'offer__rating', stars: 'offer__stars', value: 'offer__rating-value' }} shouldRatingShown />

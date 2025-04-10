@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { AuthorizationStatus } from '../../const';
-import { useAuthStatusSelector } from '../../store/user-process/selectors';
+import { useAuthStatusSelector } from '../../store';
 import { PlaceComment } from '../../types';
 import { getCommentDate } from '../../utils/comment';
 import PlaceRating from '../place-card/place-rating';

@@ -1,7 +1,6 @@
 import axios, { AxiosError, AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
-import { store } from '../store';
+import { store, userProcessActions } from '../store';
 import { dropUserData, getToken } from './token';
-import { userProcessActions } from '../store/user-process/user-process';
 import { AuthorizationStatus } from '../const';
 import { StatusCodes } from 'http-status-codes';
 import { toast } from 'react-toastify';

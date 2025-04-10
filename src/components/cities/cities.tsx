@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import cn from 'classnames';
 import PlaceList from '../place-list/place-list';
 import PlaceListEmpty from '../place-list/place-list-empty';
 import { useSearchParams } from 'react-router-dom';
@@ -18,7 +18,7 @@ export default function Cities({ previews }: CitiesProps) {
   const filteredPreviews = useMemo(() => previews.filter((item) => item.city.name === cityName), [cityName, previews]);
   const markers = useMemo(() => filteredPreviews.map((item) => ({ id: item.id, ...item.location })), [filteredPreviews]);
   return (
-    <div className={clsx('cities__places-container', 'container', !previews.length && 'cities__places-container--empty')}>
+    <div className={cn('cities__places-container', 'container', !previews.length && 'cities__places-container--empty')}>
       {previews.length ?
         <>
           <PlaceList previews={filteredPreviews} cityName={cityName} />

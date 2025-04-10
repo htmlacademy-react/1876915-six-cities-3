@@ -117,8 +117,8 @@ export const KeyCode = {
   ENTER: 'Enter',
 } as const;
 
-export enum NameSpace {
-  Data = 'DATA',
-  Place = 'PLACE',
-  User = 'USER',
+export enum SliceNameSpace {
+  Data = 'data',
+  Place = 'place',
+  User = 'user'
 }

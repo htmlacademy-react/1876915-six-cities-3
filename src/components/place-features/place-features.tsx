@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import cn from 'classnames';
 import { Place } from '../../types';
 import { capitalizeFirstLetter, pluralize } from '../../utils';
 
@@ -30,7 +30,7 @@ export default function PlaceFeatures({ place }: PlaceFeaturesProps) {
       <div className="offer__host">
         <h2 className="offer__host-title">Meet the host</h2>
         <div className="offer__host-user user">
-          <div className={clsx('offer__avatar-wrapper', 'user__avatar-wrapper', place.host.isPro && 'offer__avatar-wrapper--pro')} >
+          <div className={cn('offer__avatar-wrapper', 'user__avatar-wrapper', place.host.isPro && 'offer__avatar-wrapper--pro')} >
             <img
               className="offer__avatar user__avatar"
               src={place.host.avatarUrl}

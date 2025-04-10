@@ -1,6 +1,6 @@
 import { KeyboardEventHandler, ReactEventHandler, useEffect, useState } from 'react';
 import { KeyCode, SortType } from '../../const';
-import clsx from 'clsx';
+import cn from 'classnames';
 import { PlaceSortType } from '../../types';
 
 type PlaceSortProps = {
@@ -66,11 +66,11 @@ export default function PlaceSort({ sortChangeHandler, activeSortType }: PlaceSo
           <use xlinkHref="#icon-arrow-select" />
         </svg>
       </span>
-      <ul className={clsx('places__options', 'places__options--custom', isSelectOpened && 'places__options--opened')}>
+      <ul className={cn('places__options', 'places__options--custom', isSelectOpened && 'places__options--opened')}>
         {Object.entries(SortType).map(([type, value]) => (
           <li
             key={type}
-            className={clsx('places__option', (type === activeSortType) && 'places__option--active')}
+            className={cn('places__option', (type === activeSortType) && 'places__option--active')}
             tabIndex={0}
             onClick={onSelectChangeHandler}
             data-sort-type={type}

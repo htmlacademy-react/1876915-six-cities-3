@@ -1,5 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import { AppRoute } from '../const';
+import { useIsFavoriteEmptySelector } from '../store';
 
 const defaultConfig = {
   pageClassName: '',
@@ -26,5 +27,12 @@ export const useLayoutConfig = () => {
 
   const { pathname } = useLocation();
 
-  return { ...defaultConfig, ...LayoutConfig[pathname as AppRoute] };
+  const isFavoritesEmpty = useIsFavoriteEmptySelector();
+  const config = LayoutConfig[pathname as AppRoute] || defaultConfig;
+
+  if (isFavoritesEmpty && (pathname as AppRoute === AppRoute.Favorites)) {
+    config.pageClassName = 'page page--favorites-empty';
+  }
+
+  return { ...defaultConfig, ...config };
 };

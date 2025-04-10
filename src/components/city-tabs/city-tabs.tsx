@@ -1,9 +1,9 @@
-import clsx from 'clsx';
+import cn from 'classnames';
 import { Link, useSearchParams } from 'react-router-dom';
 import { ReactEventHandler, useEffect } from 'react';
 import { CITY_NAMES, DEFAULT_CITY } from '../../const';
 import { useActionCreators } from '../../hooks';
-import { placeProcessActions } from '../../store/place-process/place-process';
+import { placeProcessActions } from '../../store';
 import { PlacePreview } from '../../types';
 import { getCityLocation } from '../../utils/marker';
 
@@ -36,7 +36,7 @@ export default function CityTabs({ previews }: CityTabsProps) {
         {CITY_NAMES.map((name) => (
           <li className="locations__item" key={`city-tab-${name}`} onClick={tabClickHandler} data-tab-name={name}>
             <Link
-              className={clsx('locations__item-link', 'tabs__item', (activeCityName === name) && 'tabs__item--active')}
+              className={cn('locations__item-link', 'tabs__item', (activeCityName === name) && 'tabs__item--active')}
               to="#"
               onClick={(evt) => evt.preventDefault()}
             >

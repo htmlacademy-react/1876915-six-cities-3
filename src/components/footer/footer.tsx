@@ -1,6 +1,7 @@
-import clsx from 'clsx';
+import cn from 'classnames';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
+import { memo } from 'react';
 
 type FooterProps = {
   className?: string;
@@ -8,7 +9,7 @@ type FooterProps = {
 
 export default function Footer({ className }: FooterProps) {
   return (
-    <footer className={clsx('footer', className)}>
+    <footer className={cn('footer', className)}>
       <Link className="footer__logo-link" to={AppRoute.Main}>
         <img
           className="footer__logo"
@@ -21,3 +22,5 @@ export default function Footer({ className }: FooterProps) {
     </footer >
   );
 }
+
+export const MemoizedFooter = memo(Footer);

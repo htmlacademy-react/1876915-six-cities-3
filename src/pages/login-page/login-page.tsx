@@ -1,9 +1,8 @@
 import { Helmet } from 'react-helmet-async';
 import { AppRoute, AuthorizationStatus, LoginMessages, USER_PASSWORD_MAX_LENGTH, USER_PASSWORD_MIN_LENGTH } from '../../const';
 import { Link, Navigate } from 'react-router-dom';
-import { useAuthStatusSelector, useLoginStatusSelector } from '../../store/user-process/selectors';
+import { useAuthStatusSelector, useLoginStatusSelector, userProcessActions } from '../../store';
 import { useActionCreators } from '../../hooks';
-import { userProcessActions } from '../../store/user-process/user-process';
 import { FormEventHandler, useMemo, useRef } from 'react';
 import { getRandomCityName, testEmailExpr, testPasswordExpr } from '../../utils';
 import { RequestStatus } from '../../types';
