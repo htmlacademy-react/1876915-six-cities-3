@@ -22,7 +22,7 @@ export type PlaceDataProcess = {
   favoritesFetchStatus: RequestStatus;
   commentsFetchStatus: RequestStatus;
   commentsCreateStatus: RequestStatus;
-  changeFavoriteStatus: RequestStatus;
+  changeFavoriteStatus: Record<string, RequestStatus>;
   previews: PlacePreview[];
   favorites: PlacePreview[];
   comments: PlaceComment[];

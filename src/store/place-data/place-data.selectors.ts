@@ -5,7 +5,7 @@ import { State } from '../../types';
 export const useCommentCreateStatusSelector = () => useAppSelector((state: Pick<State, SliceNameSpace.Data>) => state[SliceNameSpace.Data].commentsCreateStatus);
 export const usePreviewsFetchStatusSelector = () => useAppSelector((state: Pick<State, SliceNameSpace.Data>) => state[SliceNameSpace.Data].previewsFetchStatus);
 export const useFavoritesFetchStatusSelector = () => useAppSelector((state: Pick<State, SliceNameSpace.Data>) => state[SliceNameSpace.Data].favoritesFetchStatus);
-export const useChangeFavoritesStatusSelector = () => useAppSelector((state: Pick<State, SliceNameSpace.Data>) => state[SliceNameSpace.Data].changeFavoriteStatus);
+export const useChangeFavoritesStatusSelector = (placeId: string) => useAppSelector((state: Pick<State, SliceNameSpace.Data>) => state[SliceNameSpace.Data].changeFavoriteStatus[placeId]);
 export const usePlaceFetchStatusSelector = () => useAppSelector((state: Pick<State, SliceNameSpace.Data>) => state[SliceNameSpace.Data].placeFetchStatus);
 export const useNearbyFetchStatusSelector = () => useAppSelector((state: Pick<State, SliceNameSpace.Data>) => state[SliceNameSpace.Data].nearbyFetchStatus);
 export const useCommentsFetchStatusSelector = () => useAppSelector((state: Pick<State, SliceNameSpace.Data>) => state[SliceNameSpace.Data].commentsFetchStatus);

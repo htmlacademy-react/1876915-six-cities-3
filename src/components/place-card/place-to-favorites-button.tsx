@@ -18,7 +18,7 @@ export default function PlaceToFavoritesButton({ className, placeId, width = D.C
   const navigate = useNavigate();
 
   const authStatus = useAuthStatusSelector();
-  const status = useChangeFavoritesStatusSelector();
+  const status = useChangeFavoritesStatusSelector(placeId);
   const isFavorite = useIsFavoriteSelector(placeId);
 
   const { changeFavoriteStatusAction } = useActionCreators(placeDataActions);
