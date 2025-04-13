@@ -1,6 +1,6 @@
 import { memo, MouseEventHandler } from 'react';
 import cn from 'classnames';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { getUserData } from '../../services/token';
 import { useFavoritesSelector, userProcessActions } from '../../store';
@@ -14,11 +14,18 @@ type HeaderProps = {
 export default function Header({ isLogoActive, shouldUserInfoRender }: HeaderProps) {
 
   const { logoutAction } = useActionCreators(userProcessActions);
+  const location = useLocation();
   const favorites = useFavoritesSelector();
   const user = getUserData();
 
   const logoClickHandler: MouseEventHandler<HTMLAnchorElement> = (evt) => {
     if (isLogoActive) {
+      evt.preventDefault();
+    }
+  };
+
+  const emailClickHandler: MouseEventHandler<HTMLAnchorElement> = (evt) => {
+    if (location.pathname as AppRoute === AppRoute.Favorites) {
       evt.preventDefault();
     }
   };
@@ -49,7 +56,7 @@ export default function Header({ isLogoActive, shouldUserInfoRender }: HeaderPro
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>
+                  <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites} onClick={emailClickHandler}>
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                       {user && <img src={user.avatarUrl}></img>}
                     </div>

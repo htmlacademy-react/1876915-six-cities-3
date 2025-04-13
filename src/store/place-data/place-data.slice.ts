@@ -10,7 +10,7 @@ const initialState: PlaceDataProcess = {
   favoritesFetchStatus: RequestStatus.Fulfilled,
   commentsFetchStatus: RequestStatus.Fulfilled,
   commentsCreateStatus: RequestStatus.Fulfilled,
-  changeFavoriteStatus: RequestStatus.Fulfilled,
+  changeFavoriteStatus: {},
   previews: [],
   favorites: [],
   comments: [],
@@ -45,7 +45,8 @@ export const placeData = createSlice({
         state.favoritesFetchStatus = RequestStatus.Rejected;
       })
       .addCase(changeFavoriteStatusAction.fulfilled, (state, { payload }) => {
-        state.changeFavoriteStatus = RequestStatus.Fulfilled;
+
+        state.changeFavoriteStatus[payload.id] = RequestStatus.Fulfilled;
 
         if (!payload.isFavorite) {
           state.favorites = state.favorites.filter((item) => item.id !== payload.id);
@@ -57,11 +58,11 @@ export const placeData = createSlice({
           state.favorites = state.favorites.concat(payload);
         }
       })
-      .addCase(changeFavoriteStatusAction.pending, (state) => {
-        state.changeFavoriteStatus = RequestStatus.Pending;
+      .addCase(changeFavoriteStatusAction.pending, (state, { meta }) => {
+        state.changeFavoriteStatus[meta.arg.placeId] = RequestStatus.Pending;
       })
-      .addCase(changeFavoriteStatusAction.rejected, (state) => {
-        state.changeFavoriteStatus = RequestStatus.Rejected;
+      .addCase(changeFavoriteStatusAction.rejected, (state, { meta }) => {
+        state.changeFavoriteStatus[meta.arg.placeId] = RequestStatus.Rejected;
       })
       .addCase(fetchPlaceAction.fulfilled, (state, { payload }) => {
         state.place = payload;

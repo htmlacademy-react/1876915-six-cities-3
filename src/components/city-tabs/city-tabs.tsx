@@ -3,25 +3,28 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { ReactEventHandler, useEffect } from 'react';
 import { CITY_NAMES, DEFAULT_CITY } from '../../const';
 import { useActionCreators } from '../../hooks';
-import { placeProcessActions } from '../../store';
-import { PlacePreview } from '../../types';
+import { placeProcessActions, usePreviewsSelector } from '../../store';
 import { getCityLocation } from '../../utils/marker';
+import { capitalizeFirstLetter } from '../../utils';
 
-type CityTabsProps = {
-  previews: PlacePreview[];
-};
-
-export default function CityTabs({ previews }: CityTabsProps) {
+export default function CityTabs() {
+  const previews = usePreviewsSelector();
   const { setActiveMarker } = useActionCreators(placeProcessActions);
   const [searchParams, setSearchParams] = useSearchParams();
   const activeCityName = searchParams.get('city');
+  const isValidCityName = activeCityName && CITY_NAMES.includes(capitalizeFirstLetter(activeCityName) as typeof CITY_NAMES[number]);
 
   useEffect(() => {
-    if (!activeCityName) {
+    if (!isValidCityName) {
       setSearchParams([['city', DEFAULT_CITY.name]]);
     }
   });
 
+  useEffect(() => {
+    if (isValidCityName) {
+      setActiveMarker(getCityLocation(activeCityName, previews));
+    }
+  }, [activeCityName, isValidCityName, previews, setActiveMarker]);
 
   const tabClickHandler: ReactEventHandler<HTMLLIElement> = ({ currentTarget: { dataset: { tabName } } }) => {
     if (tabName && (tabName !== activeCityName)) {
