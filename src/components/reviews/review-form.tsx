@@ -4,7 +4,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useActionCreators } from '../../hooks';
 import { RequestStatus } from '../../types';
 import { useEffect } from 'react';
-import { placeDataActions, useCommentCreateStatusSelector } from '../../store';
+import { commentActions, useCommentCreateStatusSelector } from '../../store';
 
 export type Inputs = {
   comment: string;
@@ -18,7 +18,7 @@ type ReviewFormProps = {
 export default function ReviewForm({ placeId }: ReviewFormProps) {
 
   const { register, handleSubmit, formState: { isValid }, reset, watch } = useForm<Inputs>({ defaultValues: { comment: '', rating: 0 } });
-  const { createCommentAction } = useActionCreators(placeDataActions);
+  const { createCommentAction } = useActionCreators(commentActions);
   const status = useCommentCreateStatusSelector();
   const isSubmitting = (status === RequestStatus.Pending);
 

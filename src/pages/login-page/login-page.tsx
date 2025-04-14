@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { AppRoute, AuthorizationStatus, LoginMessages, USER_PASSWORD_MAX_LENGTH, USER_PASSWORD_MIN_LENGTH } from '../../const';
 import { Link, Navigate } from 'react-router-dom';
-import { useAuthStatusSelector, useLoginStatusSelector, userProcessActions } from '../../store';
+import { useAuthStatusSelector, useLoginStatusSelector, userActions } from '../../store';
 import { useActionCreators } from '../../hooks';
 import { FormEventHandler, useMemo, useRef } from 'react';
 import { getRandomCityName, testEmailExpr, testPasswordExpr } from '../../utils';
@@ -23,7 +23,7 @@ export default function LoginPage() {
   const authStatus = useAuthStatusSelector();
   const isAuthorized = (authStatus === AuthorizationStatus.Auth);
 
-  const { loginAction } = useActionCreators(userProcessActions);
+  const { loginAction } = useActionCreators(userActions);
 
   const formSubmitHandler: FormEventHandler = (evt) => {
     evt.preventDefault();

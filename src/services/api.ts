@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
-import { store, userProcessActions } from '../store';
+import { store, userActions } from '../store';
 import { dropUserData, getToken } from './token';
 import { AuthorizationStatus } from '../const';
 import { StatusCodes } from 'http-status-codes';
@@ -10,7 +10,7 @@ type AxiosResponseDataType = {
   message: string;
 }
 
-const BACKEND_URL = 'https://15.design.htmlacademy.pro/six-cities/';
+const BACKEND_URL = (import.meta.env.VITE_BACKEND_URL as string) || 'https://15.design.htmlacademy.pro/six-cities/';
 const REQUEST_TIMEOUT = 5000;
 
 const StatusCodeMapping: Record<number, boolean> = {
@@ -38,7 +38,7 @@ const onResponseError = (error: AxiosError<AxiosResponseDataType>): Promise<Axio
 
   if (response) {
     if (response.status === +StatusCodes.UNAUTHORIZED) {
-      store.dispatch(userProcessActions.setAuthorizationStatus(AuthorizationStatus.NoAuth));
+      store.dispatch(userActions.setAuthorizationStatus(AuthorizationStatus.NoAuth));
       dropUserData();
     }
 

@@ -6,7 +6,7 @@ import { AppDispatch, State } from '../types';
 import { LoggedUser } from '../types';
 import { AuthData } from '../types';
 import { dropUserData, saveUserData } from './token';
-import { redirectAction, userProcessActions } from '../store';
+import { redirectAction, userActions } from '../store';
 
 type ThunkConfig = {
   dispatch: AppDispatch;
@@ -93,7 +93,7 @@ export const logoutAction = createAsyncThunk<void, undefined, ThunkConfig>(
     try {
       await api.delete(ApiRoute.Logout);
     } finally {
-      dispatch(userProcessActions.setAuthorizationStatus(AuthorizationStatus.NoAuth));
+      dispatch(userActions.setAuthorizationStatus(AuthorizationStatus.NoAuth));
       dropUserData();
     }
   },

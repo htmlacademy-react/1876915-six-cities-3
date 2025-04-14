@@ -3,7 +3,7 @@ import cn from 'classnames';
 import { Link, useLocation } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { getUserData } from '../../services/token';
-import { useFavoritesSelector, userProcessActions } from '../../store';
+import { useFavoritesSelector, userActions } from '../../store';
 import { useActionCreators } from '../../hooks';
 
 type HeaderProps = {
@@ -13,7 +13,7 @@ type HeaderProps = {
 
 export default function Header({ isLogoActive, shouldUserInfoRender }: HeaderProps) {
 
-  const { logoutAction } = useActionCreators(userProcessActions);
+  const { logoutAction } = useActionCreators(userActions);
   const location = useLocation();
   const favorites = useFavoritesSelector();
   const user = getUserData();

@@ -12,14 +12,13 @@ import NotFoundPageRedirect from '../../pages/not-found-page/not-found-page-redi
 import ScrollToTop from '../scroll-top/scroll-top';
 import Spinner from '../spinner/spinner';
 import { RequestStatus } from '../../types';
-import { placeDataActions, useAuthStatusSelector, useFavoritesFetchStatusSelector, usePreviewsFetchStatusSelector, userProcessActions } from '../../store';
+import { storeActions, useAuthStatusSelector, useFavoritesFetchStatusSelector, usePreviewsFetchStatusSelector } from '../../store';
 import { useActionCreators } from '../../hooks';
 import { useEffect } from 'react';
 
 export default function App() {
 
-  const { fetchPreviewsAction, fetchFavoritesAction } = useActionCreators(placeDataActions);
-  const { checkAuthAction } = useActionCreators(userProcessActions);
+  const { fetchPreviewsAction, fetchFavoritesAction, checkAuthAction } = useActionCreators(storeActions);
 
   const authStatus = useAuthStatusSelector();
   const isAuthorized = (authStatus === AuthorizationStatus.Auth);

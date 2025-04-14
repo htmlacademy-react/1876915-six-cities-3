@@ -4,7 +4,7 @@ import { MarkerType } from '../../types';
 import { BaseIconOptions, Icon, LayerGroup, layerGroup, Marker } from 'leaflet';
 import { ActiveIcon, DefaultIcon } from '../../const';
 import { useMap } from '../../hooks';
-import { useActiveMarkerSelector } from '../../store/place-process/place-process.selectors';
+import { useActiveMarkerSelector } from '../../store/marker/marker.selectors';
 
 const defaultIcon = new Icon(DefaultIcon as BaseIconOptions);
 const activeIcon = new Icon(ActiveIcon as BaseIconOptions);

@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import { AppRoute, AuthorizationStatus, ImageDefault as D } from '../../const';
 import { MouseEventHandler } from 'react';
-import { placeDataActions, useAuthStatusSelector, useChangeFavoritesStatusSelector, useIsFavoriteSelector } from '../../store';
+import { favoriteActions, useAuthStatusSelector, useFavoritesChangeStatusSelector, useIsFavoriteSelector } from '../../store';
 import { useActionCreators } from '../../hooks';
 import { RequestStatus } from '../../types';
 import { useNavigate } from 'react-router-dom';
@@ -18,10 +18,10 @@ export default function PlaceToFavoritesButton({ className, placeId, width = D.C
   const navigate = useNavigate();
 
   const authStatus = useAuthStatusSelector();
-  const status = useChangeFavoritesStatusSelector(placeId);
+  const status = useFavoritesChangeStatusSelector(placeId);
   const isFavorite = useIsFavoriteSelector(placeId);
 
-  const { changeFavoriteStatusAction } = useActionCreators(placeDataActions);
+  const { changeFavoriteStatusAction } = useActionCreators(favoriteActions);
   const isButtonDisabled = (status === RequestStatus.Pending);
 
   const clickHandler: MouseEventHandler<HTMLButtonElement> = () => {
