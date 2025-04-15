@@ -9,7 +9,7 @@ const initialState: FavoriteState = {
   favorites: [],
 };
 
-export const favoriteSlice = createSlice({
+const favoriteSlice = createSlice({
   name: SliceNameSpace.Favorites,
   initialState,
   reducers: {},

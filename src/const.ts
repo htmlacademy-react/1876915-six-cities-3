@@ -118,9 +118,9 @@ export const KeyCode = {
 } as const;
 
 export enum SliceNameSpace {
-  Comments = 'comments',
-  Favorites = 'favorites',
-  Marker = 'marker',
-  Place = 'place',
-  User = 'user'
+  Comments = 'Comments',
+  Favorites = 'Favorites',
+  Marker = 'Marker',
+  Place = 'Place',
+  User = 'User'
 }

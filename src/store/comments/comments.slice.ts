@@ -9,7 +9,7 @@ const initialState: CommentsState = {
   comments: [],
 };
 
-export const commentSlice = createSlice({
+const commentSlice = createSlice({
   name: SliceNameSpace.Comments,
   initialState,
   reducers: {},

@@ -1,9 +1,9 @@
 import axios, { AxiosError, AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
-import { store, userActions } from '../store';
-import { dropUserData, getToken } from './token';
-import { AuthorizationStatus } from '../const';
 import { StatusCodes } from 'http-status-codes';
 import { toast } from 'react-toastify';
+import { AuthorizationStatus } from '../const';
+import { store, userActions } from '../store';
+import { dropUserData, getToken } from './token';
 
 type AxiosResponseDataType = {
   type: string;

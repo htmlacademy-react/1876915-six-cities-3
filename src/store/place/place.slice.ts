@@ -12,7 +12,7 @@ const initialState: PlaceState = {
   nearbyPreviews: [],
 };
 
-export const placeSlice = createSlice({
+const placeSlice = createSlice({
   name: SliceNameSpace.Place,
   initialState,
   reducers: {},

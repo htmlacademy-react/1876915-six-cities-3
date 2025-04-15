@@ -4,7 +4,7 @@ import { MarkerType } from '../../types/place';
 import { faker } from '@faker-js/faker';
 
 describe('Marker selectors', () => {
-  const mockState = {
+  const state = {
     [SliceNameSpace.Marker]: {
       activeMarker: {
         latitude: faker.location.latitude(),
@@ -15,7 +15,7 @@ describe('Marker selectors', () => {
   };
 
   it('should return active marker', () => {
-    const result = getActiveMarker(mockState);
-    expect(result).toEqual(mockState[SliceNameSpace.Marker].activeMarker);
+    const result = getActiveMarker(state);
+    expect(result).toEqual(state[SliceNameSpace.Marker].activeMarker);
   });
 });

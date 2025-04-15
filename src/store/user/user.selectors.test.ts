@@ -4,7 +4,7 @@ import { SliceNameSpace } from '../../const';
 import { AuthorizationStatus } from '../../const';
 
 describe('User selectors', () => {
-  const mockState = {
+  const state = {
     [SliceNameSpace.User]: {
       authorizationStatus: AuthorizationStatus.Auth,
       loginStatus: RequestStatus.Fulfilled
@@ -12,12 +12,12 @@ describe('User selectors', () => {
   };
 
   it('should return auth status', () => {
-    const result = getAuthStatus(mockState);
+    const result = getAuthStatus(state);
     expect(result).toBe(AuthorizationStatus.Auth);
   });
 
   it('should return login status', () => {
-    const result = getLoginStatus(mockState);
+    const result = getLoginStatus(state);
     expect(result).toBe(RequestStatus.Fulfilled);
   });
 });
