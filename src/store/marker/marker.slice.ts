@@ -1,13 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { DEFAULT_CITY } from '../../const';
 import { SliceNameSpace } from '../../const';
-import { MarkerType, PlaceProcess } from '../../types';
+import { MarkerType, MarkerState } from '../../types';
 
-const initialState: PlaceProcess = {
+const initialState: MarkerState = {
   activeMarker: DEFAULT_CITY,
 };
 
-const placeProcess = createSlice({
+const markerSlice = createSlice({
   name: SliceNameSpace.Place,
   initialState,
   reducers: {
@@ -17,5 +17,5 @@ const placeProcess = createSlice({
   },
 });
 
-export const placeProcessActions = placeProcess.actions;
-export const placeProcessReducer = placeProcess.reducer;
+export const markerActions = markerSlice.actions;
+export const markerReducer = markerSlice.reducer;

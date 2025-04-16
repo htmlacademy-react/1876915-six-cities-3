@@ -5,7 +5,7 @@ import { SortType } from '../../const';
 import PlaceCard from '../place-card';
 import PlaceSort from '../place-sort/place-sort';
 import { useActionCreators } from '../../hooks';
-import { placeProcessActions } from '../../store/place-process/place-process.slice';
+import { markerActions } from '../../store/marker/marker.slice';
 
 type PlaceListProps = {
   previews: PlacePreview[];
@@ -14,7 +14,7 @@ type PlaceListProps = {
 
 export default function PlaceList({ previews, cityName }: PlaceListProps) {
 
-  const { setActiveMarker } = useActionCreators(placeProcessActions);
+  const { setActiveMarker } = useActionCreators(markerActions);
   const mouseEventHandler = (marker: MarkerType) => setActiveMarker(marker);
 
   const [activeSortType, setSortType] = useState<PlaceSortType>(SortType.Popular);

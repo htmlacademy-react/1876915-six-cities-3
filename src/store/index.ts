@@ -1,17 +1,21 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { createAPI } from '../services/api';
-import { redirect } from './middlewares/redirect';
-import { placeDataReducer } from './place-data/place-data.slice';
-import { placeProcessReducer } from './place-process/place-process.slice';
-import { userProcessReducer } from './user-process/user-process.slice';
+import { redirect } from './_middlewares/redirect/redirect';
+import { placeActions, placeReducer } from './place/place.slice';
+import { markerActions, markerReducer } from './marker/marker.slice';
+import { userActions, userReducer } from './user/user.slice';
 import { SliceNameSpace } from '../const';
+import { commentActions, commentsReducer } from './comments/comments.slice';
+import { favoriteActions, favoriteReducer } from './favorites/favorites.slice';
 
 export const api = createAPI();
 
 export const rootReducer = combineReducers({
-  [SliceNameSpace.Data]: placeDataReducer,
-  [SliceNameSpace.Place]: placeProcessReducer,
-  [SliceNameSpace.User]: userProcessReducer,
+  [SliceNameSpace.Comments]: commentsReducer,
+  [SliceNameSpace.Favorites]: favoriteReducer,
+  [SliceNameSpace.Marker]: markerReducer,
+  [SliceNameSpace.Place]: placeReducer,
+  [SliceNameSpace.User]: userReducer,
 });
 
 export const store = configureStore({
@@ -24,11 +28,17 @@ export const store = configureStore({
     }).concat(redirect),
 });
 
-export * from '../store/middlewares/redirect';
-export * from '../store/middlewares/redirect-action';
-export * from '../store/place-data/place-data.slice';
-export * from '../store/place-data/place-data.selectors';
-export * from '../store/place-process/place-process.slice';
-export * from '../store/place-process/place-process.selectors';
-export * from './user-process/user-process.slice';
-export * from '../store/user-process/user-process.selectors';
+export const storeActions = { ...commentActions, ...favoriteActions, ...markerActions, ...placeActions, ...userActions };
+
+export * from './_middlewares/redirect/redirect';
+export * from './_middlewares/redirect/redirect-action';
+export * from './comments/comments.selectors';
+export * from './comments/comments.slice';
+export * from './favorites/favorites.selectors';
+export * from './favorites/favorites.slice';
+export * from './place/place.slice';
+export * from './place/place.selectors';
+export * from './marker/marker.slice';
+export * from './marker/marker.selectors';
+export * from './user/user.slice';
+export * from './user/user.selectors';

@@ -6,26 +6,32 @@ import { PlaceComment } from './comment';
 export type State = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
-export type UserProcess = {
+export type UserState = {
   authorizationStatus: AuthorizationStatus;
   loginStatus: RequestStatus;
 };
 
-export type PlaceProcess = {
+export type MarkerState = {
   activeMarker: MarkerType;
 }
 
-export type PlaceDataProcess = {
+export type CommentsState = {
+  commentsFetchStatus: RequestStatus;
+  commentsCreateStatus: RequestStatus;
+  comments: PlaceComment[];
+}
+
+export type FavoriteState = {
+  favoritesFetchStatus: RequestStatus;
+  changeFavoriteStatus: Record<string, RequestStatus>;
+  favorites: PlacePreview[];
+}
+
+export type PlaceState = {
   previewsFetchStatus: RequestStatus;
   placeFetchStatus: RequestStatus;
   nearbyFetchStatus: RequestStatus;
-  favoritesFetchStatus: RequestStatus;
-  commentsFetchStatus: RequestStatus;
-  commentsCreateStatus: RequestStatus;
-  changeFavoriteStatus: Record<string, RequestStatus>;
   previews: PlacePreview[];
-  favorites: PlacePreview[];
-  comments: PlaceComment[];
   place: Place | null;
   nearbyPreviews: PlacePreview[] | [];
 }
@@ -35,3 +41,4 @@ export enum RequestStatus {
   Fulfilled = 'Fulfilled',
   Rejected = 'Rejected',
 }
+

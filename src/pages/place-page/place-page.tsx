@@ -1,7 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { Navigate, useParams } from 'react-router-dom';
 import { AppRoute, DEFAULT_CITY, MAX_SHOWN_NEAR_PLACES, ImageDefault as D } from '../../const';
-import { placeDataActions, placeProcessActions, useCommentsFetchStatusSelector, useCommentsSelector, useNearbyFetchStatusSelector, useNearbySelector, usePlaceFetchStatusSelector, usePlaceSelector } from '../../store';
 import { useEffect } from 'react';
 import { MarkerType, Place, RequestStatus } from '../../types';
 import { useActionCreators } from '../../hooks';
@@ -14,13 +13,13 @@ import PlaceToFavoritesButton from '../../components/place-card/place-to-favorit
 import PlaceRating from '../../components/place-card/place-rating';
 import PlaceGallery from '../../components/place-gallery/place-gallery';
 import PlaceFeatures from '../../components/place-features/place-features';
+import { storeActions, useCommentsFetchStatusSelector, useCommentsSelector, useNearbyFetchStatusSelector, useNearbySelector, usePlaceFetchStatusSelector, usePlaceSelector } from '../../store';
 
 const getLocation = (place: Place | null) => place ? ({ id: place.id, ...place.location, zoom: place.city.location.zoom }) : DEFAULT_CITY as MarkerType;
 
 export default function PlacePage() {
   const { id } = useParams<'id'>();
-  const { setActiveMarker } = useActionCreators(placeProcessActions);
-  const { fetchPlaceAction, fetchNearbyPreviewsAction, fetchPlaceCommentsAction, } = useActionCreators(placeDataActions);
+  const { setActiveMarker, fetchPlaceAction, fetchNearbyPreviewsAction, fetchPlaceCommentsAction } = useActionCreators(storeActions);
 
   const place = usePlaceSelector();
   const placeStatus = usePlaceFetchStatusSelector();

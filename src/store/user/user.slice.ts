@@ -1,15 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AuthorizationStatus } from '../../const';
 import { SliceNameSpace } from '../../const';
-import { RequestStatus, UserProcess } from '../../types';
+import { RequestStatus, UserState } from '../../types';
 import { checkAuthAction, loginAction, logoutAction } from '../../services/api-actions';
 
-const initialState: UserProcess = {
+const initialState: UserState = {
   authorizationStatus: AuthorizationStatus.Unknown,
   loginStatus: RequestStatus.Fulfilled,
 };
 
-const userProcess = createSlice({
+const userSlice = createSlice({
   name: SliceNameSpace.User,
   initialState,
   reducers: {
@@ -42,5 +42,5 @@ const userProcess = createSlice({
   },
 });
 
-export const userProcessActions = { ...userProcess.actions, checkAuthAction, loginAction, logoutAction };
-export const userProcessReducer = userProcess.reducer;
+export const userActions = { ...userSlice.actions, checkAuthAction, loginAction, logoutAction };
+export const userReducer = userSlice.reducer;
