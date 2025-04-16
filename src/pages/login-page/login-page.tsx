@@ -44,14 +44,14 @@ export default function LoginPage() {
   return (
     (isAuthorized) ?
       <Navigate to={AppRoute.Main} /> :
-      <main className="page__main page__main--login">
+      <main className="page__main page__main--login" data-testid="login-page">
         <Helmet>
           <title>6 Cities.Login</title>
         </Helmet>
         <div className="page__login-container container">
           <section className="login">
-            <h1 className="login__title">Sign in</h1>
-            <form ref={formRef} className="login__form form" action="#" method="post" onSubmit={formSubmitHandler}>
+            <h1 className="login__title" data-testid="login-title">Sign in</h1>
+            <form ref={formRef} className="login__form form" action="#" method="post" onSubmit={formSubmitHandler} data-testid="login-form">
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
                 <input
@@ -62,6 +62,7 @@ export default function LoginPage() {
                   placeholder="Email"
                   required
                   disabled={isFormDisabled}
+                  data-testid="email-input"
                 />
               </div>
               <div className="login__input-wrapper form__input-wrapper">
@@ -76,23 +77,22 @@ export default function LoginPage() {
                   maxLength={USER_PASSWORD_MAX_LENGTH}
                   required
                   disabled={isFormDisabled}
+                  data-testid="password-input"
                 />
               </div>
-              <button name='button' className="login__submit form__submit button" type="submit" disabled={isFormDisabled}>
+              <button name='button' className="login__submit form__submit button" type="submit" disabled={isFormDisabled} data-testid="submit-button">
                 Sign in
               </button>
             </form>
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <Link className="locations__item-link" to={`${AppRoute.Main}?city=${cityName}`}>
+              <Link className="locations__item-link" to={`${AppRoute.Main}?city=${cityName}`} data-testid="city-link">
                 <span>{cityName}</span>
               </Link>
             </div>
           </section>
         </div>
       </main>
-
-
   );
 }

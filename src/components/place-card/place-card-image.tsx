@@ -12,8 +12,8 @@ type PlaceCardImageProps = {
 
 export default function PlaceCardImage({ id, url, className, width = D.DefaultWidth, height = D.DefaultHeight }: PlaceCardImageProps) {
   return (
-    <div className={cn('place-card__image-wrapper', className)}>
-      <Link to={`${AppRoute.Offer}/${id}`}>
+    <div className={cn('place-card__image-wrapper', className)} data-testid="place-card-wrapper">
+      <Link to={`${AppRoute.PlaceWithoutId}/${id}`}>
         <img
           className="place-card__image"
           src={url}

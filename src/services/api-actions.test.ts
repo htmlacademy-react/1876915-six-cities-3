@@ -1,12 +1,12 @@
 import MockAdapter from 'axios-mock-adapter';
+import thunk from 'redux-thunk';
 import { faker } from '@faker-js/faker';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { StatusCodes } from 'http-status-codes';
 import { Action } from 'redux';
-import thunk, { ThunkDispatch } from 'redux-thunk';
-import { ApiRoute } from '../const';
-import { createAPI } from '../services/api';
 import * as tokenStorage from '../services/token';
+import { ApiRoute } from '../const';
+import { AppThunkDispatch } from '../utils/test/with-store-component';
 import { api, redirectAction, userActions } from '../store';
 import { State } from '../types/state';
 import { AuthData, LoggedUser, Place, PlacePreview } from '../types';
@@ -16,7 +16,7 @@ import { fetchPreviewsAction, fetchFavoritesAction, changeFavoriteStatusAction, 
 describe('Async actions', () => {
   const mockAxiosAdapter = new MockAdapter(api);
   const middleware = [thunk.withExtraArgument(api)];
-  const mockStoreCreator = configureMockStore<State, Action<string>, ThunkDispatch<State, ReturnType<typeof createAPI>, Action>>(middleware);
+  const mockStoreCreator = configureMockStore<State, Action<string>, AppThunkDispatch>(middleware);
   let store: ReturnType<typeof mockStoreCreator>;
 
   beforeEach(() => {

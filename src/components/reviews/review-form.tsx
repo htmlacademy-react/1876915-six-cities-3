@@ -1,4 +1,4 @@
-import { USER_COMMENT_MAX_LENGTH, USER_COMMENT_MIN_LENGTH, USER_COMMENT_MIN_RATING } from '../../const';
+import { USER_COMMENT_MAX_LENGTH, USER_COMMENT_MIN_LENGTH, MIN_PLACE_RATING } from '../../const';
 import ReviewStars from './review-stars';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useActionCreators } from '../../hooks';
@@ -33,7 +33,7 @@ export default function ReviewForm({ placeId }: ReviewFormProps) {
   };
 
   return (
-    <form className="reviews__form form" action="#" method="post" onSubmit={(evt) => void handleSubmit(onFormSubmit)(evt)}>
+    <form className="reviews__form form" action="#" method="post" onSubmit={(evt) => void handleSubmit(onFormSubmit)(evt)} data-testid="review-form">
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         <ReviewStars register={register} />
@@ -49,6 +49,7 @@ export default function ReviewForm({ placeId }: ReviewFormProps) {
         placeholder="Tell how was your stay, what you like and what can be improved"
         defaultValue={''}
         disabled={isSubmitting}
+        data-testid="review-textarea"
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
@@ -60,12 +61,13 @@ export default function ReviewForm({ placeId }: ReviewFormProps) {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={!isValid || isSubmitting || (watch('rating') < USER_COMMENT_MIN_RATING)}
+          disabled={!isValid || isSubmitting || (watch('rating') < MIN_PLACE_RATING)}
+          data-testid="review-submit-button"
         >
           {isSubmitting ? '...Submitting' : 'Submit'}
         </button>
       </div>
-    </form >
+    </form>
   );
 }
 

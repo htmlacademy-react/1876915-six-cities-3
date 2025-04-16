@@ -43,8 +43,8 @@ describe('Redirect middleware', () => {
 
   it('should redirect to "/offer/:id" with redirectToRoute action', () => {
     const offerId = '123';
-    store.dispatch(redirectAction(`${AppRoute.Offer}/${offerId}`));
-    expect(browserHistory.location.pathname).toBe(`${AppRoute.Offer}/${offerId}`);
+    store.dispatch(redirectAction(`${AppRoute.PlaceWithoutId}/${offerId}`));
+    expect(browserHistory.location.pathname).toBe(`${AppRoute.PlaceWithoutId}/${offerId}`);
   });
 
   it('should not redirect with empty action', () => {

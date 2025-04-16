@@ -57,11 +57,11 @@ export default function PlacePage() {
   const markers: MarkerType[] = previews.map((item) => ({ id: item.id, ...item.location }) as MarkerType).concat(center);
 
   return (
-    <main className="page__main page__main--offer">
+    <main className="page__main page__main--offer" data-testid="place-page">
       <Helmet><title>6 Cities.{place ? place.title : ''}</title></Helmet>
 
       {shouldPlaceShown ?
-        <section className="offer">
+        <section className="offer" data-testid="offer-section">
           <div className="offer__gallery-container container">
             <PlaceGallery imageUrls={place.images} />
           </div>
@@ -69,7 +69,7 @@ export default function PlacePage() {
             <div className="offer__wrapper">
               <PlaceStatusLabel className='offer__mark' />
               <div className="offer__name-wrapper">
-                <h1 className="offer__name">{place.title}</h1>Place
+                <h1 className="offer__name" data-testid="place-title">{place.title}</h1>
                 <PlaceToFavoritesButton className='offer' placeId={id} width={D.OfferBookmarkIconWidth} height={D.OfferBookmarkIconHeight} />
               </div>
 
@@ -80,11 +80,11 @@ export default function PlacePage() {
             </div>
           </div>
           <Map markers={markers} className='offer__map' />
-        </section> : <Spinner />}
+        </section> : <Spinner data-testid="spinner" />}
 
       {shouldNearbyShown ?
         <div className="container">
-          <section className="near-places places">
+          <section className="near-places places" data-testid="nearby-section">
             <h2 className="near-places__title">
               Other places in the neighbourhood
             </h2>
@@ -99,7 +99,7 @@ export default function PlacePage() {
               ))}
             </div>
           </section>
-        </div> : <Spinner />}
-    </main >
+        </div> : null}
+    </main>
   );
 }

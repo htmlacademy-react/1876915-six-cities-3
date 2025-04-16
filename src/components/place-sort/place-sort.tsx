@@ -55,18 +55,24 @@ export default function PlaceSort({ sortChangeHandler, activeSortType }: PlaceSo
   }, []);
 
   return (
-    <form className="places__sorting" action="#" method="get" >
+    <form className="places__sorting" action="#" method="get" data-testid="places-sort">
       <span className="places__sorting-caption">Sort by</span>
-      <span className="places__sorting-type" tabIndex={0}
+      <span
+        className="places__sorting-type"
+        tabIndex={0}
         onClick={onSelectClickHandler}
         onKeyDown={onSelectKeyDown}
+        data-testid="places-sort-button"
       >
         &nbsp;{activeSortType}
         <svg className="places__sorting-arrow" width={7} height={4}>
           <use xlinkHref="#icon-arrow-select" />
         </svg>
       </span>
-      <ul className={cn('places__options', 'places__options--custom', isSelectOpened && 'places__options--opened')}>
+      <ul
+        className={cn('places__options', 'places__options--custom', isSelectOpened && 'places__options--opened')}
+        data-testid="places-sort-options"
+      >
         {Object.entries(SortType).map(([type, value]) => (
           <li
             key={type}
@@ -74,10 +80,11 @@ export default function PlaceSort({ sortChangeHandler, activeSortType }: PlaceSo
             tabIndex={0}
             onClick={onSelectChangeHandler}
             data-sort-type={type}
+            data-testid="places-sort-option"
           >{value}
           </li>
         ))}
       </ul>
-    </form >
+    </form>
   );
 }

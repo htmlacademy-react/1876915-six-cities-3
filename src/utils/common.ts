@@ -2,7 +2,7 @@ import { CitiesDefaults, USER_PASSWORD_MAX_LENGTH as MAX, USER_PASSWORD_MIN_LENG
 
 export const capitalizeFirstLetter = (line: string) => line?.replace(/^./i, (char) => char.toUpperCase());
 
-export const pluralize = (word: string, count: number) => count > 1 ? `${word}s` : word;
+export const pluralize = (word: string, count: number) => count === 1 ? word : `${word}s`;
 
 export const testEmailExpr = (email: string) => new RegExp(/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/)
   .test(email);

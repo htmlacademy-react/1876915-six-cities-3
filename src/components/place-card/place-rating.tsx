@@ -15,8 +15,8 @@ const getPercentValue = (rating: number,) => `${Math.round(rating) / MAX_PLACE_R
 
 export default function PlaceRating({ placeRating, className: { rating, stars, value = '' }, shouldRatingShown = false }: PlaceCardRatingProps) {
   return (
-    <div className={cn(rating, 'rating')}>
-      <div className={cn(stars, 'rating__stars')}>
+    <div className={cn(rating, 'rating')} data-testid="place-rating">
+      <div className={cn(stars, 'rating__stars')} data-testid="place-rating-stars">
         <span style={{ width: getPercentValue(placeRating) }} />
         <span className="visually-hidden">Rating</span>
       </div>

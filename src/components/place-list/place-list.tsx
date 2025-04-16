@@ -23,11 +23,11 @@ export default function PlaceList({ previews, cityName }: PlaceListProps) {
   const previewQuantity = sortedPreviews.length;
 
   return (
-    <section className="cities__places places">
+    <section className="cities__places places" data-testid="places-section">
       <h2 className="visually-hidden">Places</h2>
-      <b className="places__found">{previewQuantity} {pluralize('place', previewQuantity)} to stay in {cityName}</b>
+      <b className="places__found" data-testid="places-found">{previewQuantity} {pluralize('place', previewQuantity)} to stay in {cityName}</b>
       <PlaceSort activeSortType={activeSortType} sortChangeHandler={(newSortType) => setSortType(newSortType)} />
-      <div className="cities__places-list places__list tabs__content">
+      <div className="cities__places-list places__list tabs__content" data-testid="places-list">
         {sortedPreviews.map((place) => (
           <PlaceCard
             key={`place-list-card-${place.id}`}

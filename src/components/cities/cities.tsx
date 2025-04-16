@@ -14,8 +14,9 @@ export default function Cities() {
 
   const filteredPreviews = useMemo(() => previews.filter((item) => item.city.name === cityName), [cityName, previews]);
   const markers = useMemo(() => filteredPreviews.map((item) => ({ id: item.id, ...item.location })), [filteredPreviews]);
+
   return (
-    <div className={cn('cities__places-container', 'container', !previews.length && 'cities__places-container--empty')}>
+    <div className={cn('cities__places-container', 'container', !previews.length && 'cities__places-container--empty')} data-testid="cities-places-container">
       {previews.length ?
         <>
           <PlaceList previews={filteredPreviews} cityName={cityName} />

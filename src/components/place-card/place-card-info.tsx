@@ -13,7 +13,7 @@ export default function PlaceCardInfo({ preview }: PlaceCardInfoProps) {
   const { id, title, price, rating, type } = preview;
 
   return (
-    <div className="place-card__info">
+    <div className="place-card__info" data-testid="place-card-info">
       <div className="place-card__price-wrapper">
         <div className="place-card__price">
           <b className="place-card__price-value">€{price}</b>
@@ -23,7 +23,7 @@ export default function PlaceCardInfo({ preview }: PlaceCardInfoProps) {
       </div>
       <PlaceRating placeRating={rating} className={{ rating: 'place-card__rating', stars: 'place-card__stars' }} />
       <h2 className="place-card__name">
-        <Link to={`${AppRoute.Offer}/${id}`}>{title}</Link>
+        <Link to={`${AppRoute.PlaceWithoutId}/${id}`}>{title}</Link>
       </h2>
       <p className="place-card__type">{capitalizeFirstLetter(type)}</p>
     </div>

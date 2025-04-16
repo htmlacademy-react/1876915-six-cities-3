@@ -40,6 +40,6 @@ export default function Map({ markers, className }: MapProps) {
   }, [map, markers, center.id]);
 
   return (
-    <section ref={mapRef} className={cn('map', className)} />
+    <section ref={mapRef} className={cn('map', className)} data-testid="map" />
   );
 }
