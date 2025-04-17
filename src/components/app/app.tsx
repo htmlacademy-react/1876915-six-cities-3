@@ -51,7 +51,7 @@ export default function App() {
         <Route path={AppRoute.Main} element={<Layout />}>
           <Route index element={<MainPage />} />
           <Route path={AppRoute.Login} element={<LoginPage />} />
-          <Route path={AppRoute.Offers} element={<PlacePage />} />
+          <Route path={AppRoute.Place} element={<PlacePage />} />
           <Route path={AppRoute.Favorites} element={
             <PrivateRoute >
               <FavoritesPage />

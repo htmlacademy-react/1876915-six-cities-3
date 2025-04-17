@@ -15,9 +15,11 @@ type PlaceListProps = {
 
 export default function PlaceCard({ preview, cardClassName, imageClassName, imageWidth, imageHeight, mouseEventHandler, }: PlaceListProps) {
   return (
-    <article className={cn('place-card', cardClassName)}
+    <article
+      className={cn('place-card', cardClassName)}
       onMouseEnter={() => mouseEventHandler?.({ ...preview.location, id: preview.id })}
       onMouseLeave={() => mouseEventHandler?.({ ...preview.city.location })}
+      data-testid="place-card"
     >
       {preview.isPremium && <PlaceStatusLabel className='place-card__mark' />}
       <PlaceCardImage

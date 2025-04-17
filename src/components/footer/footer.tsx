@@ -9,7 +9,7 @@ type FooterProps = {
 
 export default function Footer({ className }: FooterProps) {
   return (
-    <footer className={cn('footer', className)}>
+    <footer className={cn('footer', className)} data-testid="footer">
       <Link className="footer__logo-link" to={AppRoute.Main}>
         <img
           className="footer__logo"

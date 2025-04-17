@@ -40,6 +40,7 @@ export default function PlaceToFavoritesButton({ className, placeId, width = D.C
       type="button"
       onClick={clickHandler}
       disabled={isButtonDisabled}
+      data-testid="place-to-favorites-button"
     >
       <svg
         className={`${className}__bookmark-icon`}
