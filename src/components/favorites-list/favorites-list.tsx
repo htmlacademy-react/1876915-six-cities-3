@@ -14,9 +14,9 @@ export default function FavoritesList({ previews }: FavoritesListProps) {
   }
 
   return (
-    <section className="favorites">
+    <section className="favorites" data-testid="favorites">
       <h1 className="favorites__title">Saved listing</h1>
-      <ul className="favorites__list">
+      <ul className="favorites__list" data-testid="favorites-list">
         {grouped.map(([cityName, groupedPreviews]) => <FavoritesItem cityName={cityName} previews={groupedPreviews} key={`favorite-group-${cityName}`} />)}
       </ul>
     </section>

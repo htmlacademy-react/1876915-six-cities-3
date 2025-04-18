@@ -11,7 +11,7 @@ export default function FavoritesPage() {
 
   return (
     < >
-      <main className={cn('page__main page__main--favorites', favorites.length || 'page__main--favorites-empty')}>
+      <main className={cn('page__main page__main--favorites', favorites.length || 'page__main--favorites-empty')} data-testid="favorites-page">
         <Helmet>
           <title>6 Cities.Favorite places</title>
         </Helmet>
