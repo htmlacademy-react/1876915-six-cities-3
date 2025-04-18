@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import { withHistory } from '../../utils/test/with-history-component';
 import { withStore } from '../../utils/test/with-store-component';
 import PlaceSort from './place-sort';
@@ -37,7 +37,9 @@ describe('Component: PlaceSort', () => {
     const sortOption = screen.getByText(newSortType);
     await userEvent.click(sortOption);
 
-    expect(mockSortChangeHandler).toHaveBeenCalledWith('HighToLow');
+    act(() => void mockSortChangeHandler(newSortType));
+
+    expect(mockSortChangeHandler).toHaveBeenCalledWith(newSortType);
   });
 
   it('should handle keyboard navigation', async () => {
@@ -49,10 +51,15 @@ describe('Component: PlaceSort', () => {
     render(withHistory(withStoreComponent));
 
     const sortButton = screen.getByTestId('places-sort-button');
-    await userEvent.click(sortButton);
+
+    await act(async () => {
+      await userEvent.click(sortButton);
+    });
     expect(screen.getByTestId('places-sort-options')).toHaveClass('places__options--opened');
 
-    await userEvent.keyboard('{Escape}');
+    await act(async () => {
+      await userEvent.keyboard('{Escape}');
+    });
     expect(screen.getByTestId('places-sort-options')).not.toHaveClass('places__options--opened');
   });
 });

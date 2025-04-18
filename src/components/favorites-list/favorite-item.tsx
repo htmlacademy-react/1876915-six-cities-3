@@ -10,15 +10,15 @@ type FavoritesItemProps = {
 
 export default function FavoritesItem({ cityName, previews }: FavoritesItemProps) {
   return (
-    <li className="favorites__locations-items">
+    <li className="favorites__locations-items" data-testid="favorite-item">
       <div className="favorites__locations locations locations--current">
         <div className="locations__item">
-          <Link className="locations__item-link" to={AppRoute.Main}>
-            <span>{cityName}</span>
+          <Link className="locations__item-link" to={AppRoute.Main} data-testid="favorite-item-city-link">
+            <span data-testid="favorite-item-city-name">{cityName}</span>
           </Link>
         </div>
       </div>
-      <div className="favorites__places">
+      <div className="favorites__places" data-testid="favorite-item-places">
         {previews.map((preview) => (
           <PlaceCard
             cardClassName='favorites__card'

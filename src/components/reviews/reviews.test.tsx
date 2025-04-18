@@ -7,6 +7,7 @@ import { AuthorizationStatus, SliceNameSpace } from '../../const';
 import { RequestStatus } from '../../types';
 import { vi } from 'vitest';
 import { faker } from '@faker-js/faker';
+import '../../polyfills/to-sorted';
 
 vi.mock('../place-card/place-rating', () => ({
   default: () => <div data-testid="place-rating">Place Rating</div>
@@ -26,16 +27,6 @@ describe('Component: Reviews', () => {
       loginStatus: RequestStatus.Fulfilled
     }
   };
-
-  beforeEach(() => {
-    vi.spyOn(Array.prototype, 'toSorted').mockImplementation(function <T>(this: T[], compareFn?: (a: T, b: T) => number) {
-      return [...this].sort(compareFn);
-    });
-  });
-
-  afterEach(() => {
-    vi.clearAllMocks();
-  });
 
   it('should render correctly with reviews', () => {
 

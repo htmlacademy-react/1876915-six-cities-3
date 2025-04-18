@@ -35,13 +35,14 @@ export default function CityTabs() {
 
   return (
     <section className="locations container">
-      <ul className="locations__list tabs__list">
+      <ul className="locations__list tabs__list" data-testid="city-tabs-list">
         {CITY_NAMES.map((name) => (
-          <li className="locations__item" key={`city-tab-${name}`} onClick={tabClickHandler} data-tab-name={name}>
+          <li className="locations__item" key={`city-tab-${name}`} onClick={tabClickHandler} data-tab-name={name} data-testid="city-tab">
             <Link
               className={cn('locations__item-link', 'tabs__item', (activeCityName === name) && 'tabs__item--active')}
               to="#"
               onClick={(evt) => evt.preventDefault()}
+              data-testid={`city-tab-${name}`}
             >
               <span>{name}</span>
             </Link>

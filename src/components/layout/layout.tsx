@@ -6,7 +6,7 @@ export default function Layout() {
   const { pageClassName, shouldUserInfoRender, isLogoActive } = useLayoutConfig();
 
   return (
-    <div className={`page ${pageClassName}`}>
+    <div className={`page ${pageClassName}`} data-testid="layout">
       <MemoizedHeader isLogoActive={isLogoActive} shouldUserInfoRender={shouldUserInfoRender} />
       <Outlet />
     </div>

@@ -36,6 +36,7 @@ describe('Component: PlacePage', () => {
   const placePage = (
     <Routes>
       <Route path={AppRoute.Place} element={<PlacePage />} />
+      <Route path={AppRoute.Main} element={<div>Main</div>} />
     </Routes>
   );
 

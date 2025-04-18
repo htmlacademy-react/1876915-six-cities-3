@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
 import { Place, HousingType, PlacePreview } from '../../types/place';
 import { getRandomCityName } from '../../utils';
-import { PlaceComment } from '../../types';
+import { LoggedUser, PlaceComment } from '../../types';
 import { Action } from '@reduxjs/toolkit';
 
 export const generatePlace = (): Place => {
@@ -53,3 +53,11 @@ export const generatePlaceComment = (): PlaceComment => ({
 });
 
 export const extractActionsTypes = (actions: Action<string>[]) => actions.map(({ type }) => type);
+
+export const generateLoggedUser = (): LoggedUser => ({
+  email: faker.internet.email(),
+  avatarUrl: faker.image.avatar(),
+  name: faker.person.fullName(),
+  isPro: faker.datatype.boolean(),
+  token: faker.string.uuid()
+});
