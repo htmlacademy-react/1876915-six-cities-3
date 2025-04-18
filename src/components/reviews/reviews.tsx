@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { AuthorizationStatus } from '../../const';
+import { AuthorizationStatus, MAX_SHOWN_COMMENTS } from '../../const';
 import { useAuthStatusSelector } from '../../store';
 import { PlaceComment } from '../../types';
 import { getCommentDate } from '../../utils/comment';
@@ -15,7 +15,7 @@ export default function Reviews({ reviews, placeId }: ReviewsProps) {
 
   const status = useAuthStatusSelector();
   const isAuthorized = (status === AuthorizationStatus.Auth);
-  const sortedReviews = useMemo(() => reviews.toSorted((first, second) => new Date(first.date).getDate() - new Date(second.date).getDate()), [reviews]);
+  const sortedReviews = useMemo(() => reviews.toSorted((first, second) => new Date(first.date).getDate() - new Date(second.date).getDate()).slice(0, MAX_SHOWN_COMMENTS), [reviews]);
 
   return (
     <section className="offer__reviews reviews" data-testid="reviews">
