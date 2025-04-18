@@ -1,7 +1,7 @@
+import Reviews from './reviews';
 import { render, screen } from '@testing-library/react';
 import { withStore } from '../../utils/test/with-store-component';
 import { withHistory } from '../../utils/test/with-history-component';
-import Reviews from './reviews';
 import { generatePlaceComment } from '../../utils/test/mocks';
 import { AuthorizationStatus, SliceNameSpace } from '../../const';
 import { RequestStatus } from '../../types';
