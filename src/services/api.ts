@@ -36,15 +36,18 @@ const onResponse = (response: AxiosResponse): AxiosResponse => response;
 const onResponseError = (error: AxiosError<AxiosResponseDataType>): Promise<AxiosError> => {
   const response = error.response;
 
-  if (response) {
-    if (response.status === +StatusCodes.UNAUTHORIZED) {
-      store.dispatch(userActions.setAuthorizationStatus(AuthorizationStatus.NoAuth));
-      dropUserData();
-    }
+  if (!response) {
+    toast.warn(error.message);
+    return Promise.reject(error);
+  }
 
-    if (shouldDisplayError(response.status)) {
-      toast.warn(response.data.message);
-    }
+  if (response.status === +StatusCodes.UNAUTHORIZED) {
+    store.dispatch(userActions.setAuthorizationStatus(AuthorizationStatus.NoAuth));
+    dropUserData();
+  }
+
+  if (shouldDisplayError(response.status)) {
+    toast.warn(response.data.message);
   }
 
   return Promise.reject(error);
