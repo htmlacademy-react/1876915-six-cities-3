@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 
 import { ApiRoute, AppRoute, AuthorizationStatus } from '../const';
-import { redirectAction, userActions } from '../store';
+import { favoriteActions, redirectAction, userActions } from '../store';
 import { AuthData, ChangeFavoritesResponse, CreatePlaceComment, LoggedUser, Place, PlaceComment, PlacePreview } from '../types';
 import { AppDispatch, State } from '../types';
 import { dropUserData, saveUserData } from './token';
@@ -93,6 +93,7 @@ export const logoutAction = createAsyncThunk<void, undefined, ThunkConfig>(
       await api.delete(ApiRoute.Logout);
     } finally {
       dispatch(userActions.setAuthorizationStatus(AuthorizationStatus.NoAuth));
+      dispatch(favoriteActions.setFavorites([]));
       dropUserData();
     }
   },

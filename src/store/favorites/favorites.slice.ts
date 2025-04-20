@@ -1,6 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { SliceNameSpace } from '../../const';
-import { FavoriteState, RequestStatus } from '../../types';
+import { FavoriteState, PlacePreview, RequestStatus } from '../../types';
 import { changeFavoriteStatusAction, fetchFavoritesAction } from '../../services/api-actions';
 
 const initialState: FavoriteState = {
@@ -12,7 +12,11 @@ const initialState: FavoriteState = {
 const favoriteSlice = createSlice({
   name: SliceNameSpace.Favorites,
   initialState,
-  reducers: {},
+  reducers: {
+    setFavorites: (state, { payload }: PayloadAction<PlacePreview[]>) => {
+      state.favorites = payload;
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchFavoritesAction.fulfilled, (state, { payload }) => {
