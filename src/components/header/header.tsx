@@ -3,7 +3,7 @@ import cn from 'classnames';
 import { Link, useLocation } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { getUserData } from '../../services/token';
-import { useFavoritesSelector, userActions } from '../../store';
+import { useAuthStatusSelector, useFavoritesSelector, userActions } from '../../store';
 import { useActionCreators } from '../../hooks';
 
 type HeaderProps = {
@@ -16,7 +16,8 @@ export default function Header({ isLogoActive, shouldUserInfoRender }: HeaderPro
   const { logoutAction } = useActionCreators(userActions);
   const location = useLocation();
   const favorites = useFavoritesSelector();
-  const user = getUserData();
+  const isAuthorized = useAuthStatusSelector();
+  const user = isAuthorized ? getUserData() : null;
 
   const logoClickHandler: MouseEventHandler<HTMLAnchorElement> = (evt) => {
     if (isLogoActive) {
