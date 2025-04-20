@@ -7,7 +7,7 @@ import { Action } from 'redux';
 import * as tokenStorage from '../services/token';
 import { ApiRoute } from '../const';
 import { AppThunkDispatch } from '../utils/test/with-store-component';
-import { api, redirectAction, userActions } from '../store';
+import { api, favoriteActions, redirectAction, userActions } from '../store';
 import { State } from '../types/state';
 import { AuthData, LoggedUser, Place, PlacePreview } from '../types';
 import { extractActionsTypes, generatePlace, generatePlaceComment, generatePlacePreview } from '../utils/test/mocks';
@@ -25,6 +25,7 @@ describe('Async actions', () => {
 
   describe('User slice actions', () => {
     const { checkAuthAction, loginAction, logoutAction, setAuthorizationStatus } = userActions;
+    const { setFavorites } = favoriteActions;
     const fakeUser: AuthData = { email: 'test@test.ru', password: '123456' };
     const fakeServerReplay: LoggedUser = {
       token: 'secret',
@@ -95,6 +96,7 @@ describe('Async actions', () => {
         expect(actionTypes).toEqual([
           logoutAction.pending.type,
           setAuthorizationStatus.type,
+          setFavorites.type,
           logoutAction.fulfilled.type,
         ]);
       });
